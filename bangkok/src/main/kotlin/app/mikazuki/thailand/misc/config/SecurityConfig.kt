@@ -17,12 +17,10 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity?) {
         http?.let {
             it.authorizeRequests()
-                .antMatchers("login", "/view/**").permitAll()
+                .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().defaultSuccessUrl("/")
-                .and()
-                .csrf().disable()
         }
     }
 
