@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        kotlinVersion = '1.2.20'
-        springBootVersion = '2.0.0.RC1'
+        kotlinVersion = '1.2.21'
+        springBootVersion = '1.5.10.RELEASE'
     }
     repositories {
         jcenter()
@@ -58,8 +58,9 @@ dependencies {
     compile('com.fasterxml.jackson.module:jackson-module-kotlin')
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     compile("org.jetbrains.kotlin:kotlin-reflect")
+    compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.2")
     compile 'com.google.appengine:appengine:+'
-    providedRuntime("javax.servlet:javax.servlet-api:3.1.0")
+    providedRuntime("javax.servlet:javax.servlet-api")
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
