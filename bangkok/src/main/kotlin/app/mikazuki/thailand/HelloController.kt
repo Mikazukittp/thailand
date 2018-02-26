@@ -13,7 +13,6 @@ class HelloController {
     @GetMapping("/")
     @ResponseBody
     fun hello(): String {
-        logger.info("hello")
         return "Hello World!!"
     }
 }
