@@ -1,5 +1,6 @@
 package app.mikazuki.thailand.application
 
+import app.mikazuki.thailand.application.bounce.BounceRepository
 import app.mikazuki.thailand.domain.Participant
 import app.mikazuki.thailand.domain.Party
 import com.amazonaws.auth.BasicAWSCredentials
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.MessageSource
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.io.UnsupportedEncodingException
 import java.util.*
 import javax.mail.internet.InternetAddress
@@ -23,6 +25,9 @@ class MailSenderService {
     @Autowired
     lateinit var messageSource: MessageSource
 
+    @Autowired
+    lateinit var bounceRepository: BounceRepository
+
     @Value("\${aws.ses.accesskey:}")
     lateinit var ACCESS_KEY: String
 
@@ -31,6 +36,7 @@ class MailSenderService {
 
     private val FROM_ADDRESS = "eo.wedding.beta@gmail.com"
 
+    @Transactional
     fun send(party: Party, participant: Participant) {
 
         val subject = messageSource.getMessage("confirmed.message.title", null, Locale.JAPAN)
@@ -55,10 +61,10 @@ class MailSenderService {
 
         try {
             client.sendEmail(request)
+            bounceRepository.deleteAllByEmail(participant.email)
         } catch (e: Exception) {
             LOG.error("Failed to send mail to ${participant.email}", e)
         }
-
     }
 
     private fun senderAddressBuilder(fromAddress: String, senderName: String): String {

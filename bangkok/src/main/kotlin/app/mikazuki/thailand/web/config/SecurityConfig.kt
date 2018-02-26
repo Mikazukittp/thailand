@@ -20,7 +20,7 @@ class SecurityConfig @Autowired constructor(private val userDetailsService: User
 
     override fun configure(web: WebSecurity?) {
         super.configure(web)
-        web?.ignoring()?.antMatchers("/css/**", "/js/**", "/img/**", "/font/**")
+        web?.ignoring()?.antMatchers("/css/**", "/js/**", "/img/**", "/font/**", "/api/**")
     }
 
     override fun configure(http: HttpSecurity?) {
