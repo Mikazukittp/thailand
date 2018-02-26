@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Berserker index page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<p th:text="${user.name}">User name</p>
+
+<ul>
+    <li th:each="party : ${parties}"><span th:text="${party.name}"></span></li>
+</ul>
+</body>
+</html>

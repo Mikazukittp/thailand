@@ -1,5 +1,6 @@
 package app.mikazuki.thailand.misc.config
 
+import app.mikazuki.thailand.user.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -10,9 +11,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 
+
 @EnableWebSecurity
 @Configuration
-class SecurityConfig : WebSecurityConfigurerAdapter() {
+class SecurityConfig @Autowired constructor(private val userDetailsService: UserService) : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity?) {
         http?.let {
@@ -20,18 +22,12 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
                 .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().defaultSuccessUrl("/")
+                .formLogin().defaultSuccessUrl("/user")
         }
     }
 
-    @Autowired
-    fun configureGlobal(auth: AuthenticationManagerBuilder?) {
-        super.configure(auth)
-        auth?.let {
-            it.inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER").and()
-                .withUser("admin").password("password").roles("USER", "ADMIN");
-        }
+    override fun configure(auth: AuthenticationManagerBuilder?) {
+        auth?.userDetailsService(userDetailsService)
     }
 
     @Bean
@@ -39,4 +35,6 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
         // TODO: テスト用にハッシュ化していない
         return NoOpPasswordEncoder.getInstance()
     }
+
+
 }
