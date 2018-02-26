@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
 @EnableJpaRepositories
 @SpringBootApplication
-class ThailandApplication
+class Application
 
 fun main(args: Array<String>) {
-    SpringApplication.run(ThailandApplication::class.java, *args)
+    SpringApplication.run(Application::class.java, *args)
 }
+
