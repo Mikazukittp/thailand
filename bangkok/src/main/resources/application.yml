@@ -6,3 +6,5 @@ spring:
     username: root
     password: password
     driver-class-name: com.mysql.jdbc.Driver
+  thymeleaf:
+    cache: false

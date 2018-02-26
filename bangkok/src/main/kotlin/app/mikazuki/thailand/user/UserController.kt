@@ -1,5 +1,6 @@
 package app.mikazuki.thailand.user
 
+import app.mikazuki.thailand.participants.ParticipantService
 import app.mikazuki.thailand.party.PartyService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.access.AccessDeniedException
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.servlet.ModelAndView
 
 @Controller
-class UserController @Autowired constructor(private val partyService: PartyService) {
+class UserController @Autowired constructor(private val partyService: PartyService,
+                                            private val participantService: ParticipantService) {
 
     @GetMapping("/user")
     fun show(@AuthenticationPrincipal user: User?): ModelAndView {
@@ -17,8 +19,12 @@ class UserController @Autowired constructor(private val partyService: PartyServi
         val mav = ModelAndView("user")
         mav.addObject("user", user)
 
+
         val parties = partyService.findAllByUserId(user.id)
         mav.addObject("parties", parties)
+
+        val participants = participantService.findAllByPartyId(parties.first().id)
+        mav.addObject("participants", participants)
         return mav
     }
 }

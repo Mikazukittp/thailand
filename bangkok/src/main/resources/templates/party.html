@@ -8,5 +8,12 @@
 <body>
 <p>Let's party!</p>
 <p th:text="${party.name}">aaa</p>
+
+
+<form method="post" action="/parties/confirm" th:object="${participantForm}">
+    <input type="text" th:field="*{firstName}" class="form-control"></input>
+    <input type="text" th:field="*{lastName}" class="form-control"></input>
+    <input type="submit" value="確認"/>
+</form>
 </body>
 </html>

@@ -8,12 +8,8 @@ import org.springframework.transaction.annotation.Transactional
 class PartyService @Autowired constructor(private val repository: PartyRepository) {
 
     @Transactional
-    fun findByHash(hash: String): Party? {
-        return repository.findByHash(hash)
-    }
+    fun findByHash(hash: String) = repository.findByHash(hash)
 
     @Transactional
-    fun findAllByUserId(userId: Long): List<Party> {
-        return repository.findAllByUserId(userId)
-    }
+    fun findAllByUserId(userId: Long) = repository.findAllByUserId(userId)
 }
