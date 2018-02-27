@@ -22,17 +22,11 @@ CREATE TABLE parties (
   id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
   user_id int NOT NULL,
   place_id int NOT NULL,
-  template_id int NOT NULL,
   name varchar(100) NOT NULL,
   date Date NOT NULL,
   m_price int NOT NULL,
   f_price int NOT NULL,
-  hash varchar(128) UNIQUE NOT NULL,
-  message_1 varchar(800),
-  message_2 varchar(800),
-  message_3 varchar(800),
-  message_4 varchar(800),
-  message_5 varchar(800)
+  hash varchar(128) UNIQUE NOT NULL
 );
 
 CREATE TABLE places (
@@ -41,6 +35,22 @@ CREATE TABLE places (
   address varchar(100) NOT NULL,
   phone varchar(100) NOT NULL,
   url varchar(100) NOT NULL
+);
+
+CREATE TABLE customizes (
+  id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  party_id int NOT NULL,
+  template_id int NOT NULL,
+  photo_url_1 varchar(800),
+  photo_url_2 varchar(800),
+  photo_url_3 varchar(800),
+  photo_url_4 varchar(800),
+  photo_url_5 varchar(800),
+  message_1 varchar(800),
+  message_2 varchar(800),
+  message_3 varchar(800),
+  message_4 varchar(800),
+  message_5 varchar(800)
 );
 
 CREATE TABLE templates (
@@ -63,7 +73,6 @@ CREATE TABLE participants (
   address varchar(100),
   phone varchar(100)
 );
-
 
 -- ====================
 -- データ投入
