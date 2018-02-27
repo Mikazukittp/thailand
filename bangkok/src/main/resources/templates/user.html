@@ -1,27 +1,27 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Berserker index page</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta charset="UTF-8"/>
-</head>
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/head :: common_head('出欠入力')"></div>
 <body>
-<p th:text="${user.name}">User name</p>
-<p th:text="${parties[0].name}">User name</p>
+<div th:include="common/header :: common_header"></div>
+<div class="container">
+    <p th:text="${user.name}">User name</p>
+    <p th:text="${parties[0].name}">User name</p>
 
-<table>
-    <tr>
-        <th>出欠</th>
-        <th>姓</th>
-        <th>名</th>
-        <th>お祝いメッセージ</th>
-    </tr>
-    <tr th:each="participant : ${participants}">
-        <td th:text="${participant.attendance} ? '出席' : '欠席'">出欠</td>
-        <td th:text="${participant.lastName}">姓</td>
-        <td th:text="${participant.firstName}">名</td>
-        <td th:text="${participant.message}">メッセージ</td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <th>出欠</th>
+            <th>姓</th>
+            <th>名</th>
+            <th>お祝いメッセージ</th>
+        </tr>
+        <tr th:each="participant : ${participants}">
+            <td th:text="${participant.attendance} ? '出席' : '欠席'">出欠</td>
+            <td th:text="${participant.lastName}">姓</td>
+            <td th:text="${participant.firstName}">名</td>
+            <td th:text="${participant.message}">メッセージ</td>
+        </tr>
+    </table>
+</div>
+<div th:include="common/footer :: common_footer"></div>
 </body>
 </html>
