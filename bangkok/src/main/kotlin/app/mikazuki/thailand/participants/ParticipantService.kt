@@ -9,4 +9,7 @@ class ParticipantService @Autowired constructor(private val repository: Particip
 
     @Transactional
     fun findAllByPartyId(partyId: Long) = repository.findAllByPartyId(partyId)
+
+    @Transactional
+    fun save(participant: Participant) = repository.save(participant)
 }
