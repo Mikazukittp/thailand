@@ -59,6 +59,7 @@ CREATE TABLE participants (
   side bit(1) NOT NULL,
   attendance bit(1) NOT NULL,
   message varchar(100),
+  postal_code varchar(100),
   address varchar(100),
   phone varchar(100)
 );
