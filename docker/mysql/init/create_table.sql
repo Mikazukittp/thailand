@@ -96,14 +96,13 @@ INSERT INTO plans (
 INSERT INTO parties (
   user_id,
   place_id,
-  template_id,
   name,
   date,
   m_price,
   f_price,
   hash
 ) VALUES (
-  1, 1, 1, '木村・福田家披露宴二次会', '2018-04-22', 8000, 6000, 'qwertyuiop'
+  1, 1, '木村・福田家披露宴二次会', '2018-04-22', 8000, 6000, 'qwertyuiop'
 );
 
 INSERT INTO participants (
@@ -115,14 +114,15 @@ INSERT INTO participants (
   side,
   attendance,
   message,
+  postal_code,
   address,
   phone
 ) VALUES (
-  1, '一樹', '朏島', 'k.haijima@gmail.com', 1, 1, 1, 'おめでとー', NULL, NULL
+  1, '一樹', '朏島', 'k.haijima@gmail.com', 1, 1, 1, 'おめでとー', NULL, NULL, NULL
 ), (
-  1, '優作', '徳永', 'yusaku.tokunaga@gmail.com', 1, 1, 1, NULL, NULL, NULL  
+  1, '優作', '徳永', 'yusaku.tokunaga@gmail.com', 1, 1, 1, NULL, NULL, NULL, NULL  
 ), (
-  1, 'じゅん','', '', 0, 0, 1, NULL, NULL, NULL  
+  1, 'じゅん','', '', 0, 0, 1, NULL, NULL, NULL, NULL  
 );
 
 COMMIT;
