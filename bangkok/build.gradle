@@ -49,6 +49,12 @@ repositories {
     maven { url "https://repo.spring.io/milestone" }
 }
 
+dependencyManagement {
+    imports {
+        mavenBom 'com.amazonaws:aws-java-sdk-bom:1.10.77'
+    }
+}
+
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-security'
@@ -59,6 +65,7 @@ dependencies {
     compile 'com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0'
     compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     compile 'org.jetbrains.kotlin:kotlin-reflect'
+    compile 'com.amazonaws:aws-java-sdk-ses'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.springframework.security:spring-security-test'
