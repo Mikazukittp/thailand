@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.MessageSource
 import org.springframework.stereotype.Service
-import java.util.*
+import java.io.UnsupportedEncodingException
+import javax.mail.internet.InternetAddress
 
 @Service
 class MailSenderService {
@@ -46,7 +47,7 @@ class MailSenderService {
                                         .withCharset("UTF-8").withData(textBody)))
                         .withSubject(Content()
                                 .withCharset("UTF-8").withData(subject)))
-                .withSource(FROM_ADDRESS)
+                .withSource(senderAddressBuilder(FROM_ADDRESS,messageSource.getMessage("confirmed.message.sender", null,null)))
 
         try {
             client.sendEmail(request)
@@ -55,4 +56,17 @@ class MailSenderService {
         }
 
     }
+
+    private fun senderAddressBuilder(fromAddress: String, senderName: String): String {
+        try {
+            val address = InternetAddress(fromAddress,
+                    senderName, "ISO-2022-JP")
+            return address.toString()
+        } catch (e: UnsupportedEncodingException) {
+            println("Internet Address Constructor throws UnsupportedEncoding")
+        }
+
+        return fromAddress
+    }
+
 }
