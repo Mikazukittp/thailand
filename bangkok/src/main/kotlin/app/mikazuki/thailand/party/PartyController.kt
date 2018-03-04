@@ -1,5 +1,6 @@
 package app.mikazuki.thailand.party
 
+import app.mikazuki.thailand.MailSenderService
 import app.mikazuki.thailand.participants.ParticipantForm
 import app.mikazuki.thailand.participants.ParticipantService
 import app.mikazuki.thailand.participants.toParticipant
@@ -16,7 +17,8 @@ import org.springframework.web.servlet.ModelAndView
 
 @Controller
 class PartyController @Autowired constructor(private val partyService: PartyService,
-                                             private val participantService: ParticipantService) {
+                                             private val participantService: ParticipantService,
+                                             private val mailSenderService: MailSenderService) {
 
     @ModelAttribute
     fun setupForm(): ParticipantForm {
@@ -65,6 +67,7 @@ class PartyController @Autowired constructor(private val partyService: PartyServ
 
         val participant = form.toParticipant(party.id)
         participantService.save(participant)
+        mailSenderService.send(party, participant)
         return ModelAndView("party/complete")
     }
 
