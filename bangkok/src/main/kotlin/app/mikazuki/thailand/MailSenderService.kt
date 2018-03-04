@@ -1,47 +1,52 @@
 package app.mikazuki.thailand
 
+import app.mikazuki.thailand.participants.Participant
+import app.mikazuki.thailand.party.Party
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.regions.Regions
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient
 import com.amazonaws.services.simpleemail.model.*
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.MessageSource
 import org.springframework.stereotype.Service
-
-
+import java.util.*
 
 @Service
 class MailSenderService {
 
-    private val ACCESS_KEY = "AKIAIZLAV3QSPGTJ7AGQ"
-    private val SECRET_ACCESS_KEY = "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"
-    private val FROM_ADDRESS = "mikazuki.ttp@gmail.com"
-    
-    fun send() {
+    @Autowired
+    lateinit var messageSource : MessageSource
 
-        // TODO API連結時に修正する
-        val toAddress = "mikazuki.ttp@gmail.com"
-        val subject = "【テスト】出欠確認メール"
-        val htmlBody = ("<h1>Amazon SES test (AWS SDK for Java)</h1>"
-                + "<p>This email was sent with <a href='https://aws.amazon.com/ses/'>"
-                + "Amazon SES</a> using the <a href='https://aws.amazon.com/sdk-for-java/'>"
-                + "AWS SDK for Java</a>")
-        // The email body for recipients with non-HTML email clients.
-        val textBody = "This email was sent through Amazon SES " + "using the AWS SDK for Java."
+    @Value("\${aws.ses.accesskey}")
+    lateinit var ACCESS_KEY: String
 
+    @Value("\${aws.ses.secretkey}")
+    lateinit var SECRET_ACCESS_KEY: String
+
+    private val FROM_ADDRESS = "eo.wedding.beta@gmail.com"
+
+    fun send(party: Party, participant: Participant) {
+
+        val subject =  messageSource.getMessage("confirmed.message.title", null, null)
+        var url = "http://eo-wedding.com/parties/" + party.hash
+        var userName =  participant.lastName + " " + participant.firstName
+        val attendance = if (participant.attendance) "出席" else "欠席"
+
+        var messageProperties = arrayOf(userName, party.name, url, participant.postalCode,participant.address, participant.email, attendance)
+        val textBody = messageSource.getMessage("confirmed.message.body.detail", messageProperties, null) + messageSource.getMessage("confirmed.message.footer",null,null)
         val client = AmazonSimpleEmailServiceClient(BasicAWSCredentials(ACCESS_KEY, SECRET_ACCESS_KEY))
                 .withRegion<AmazonSimpleEmailServiceClient>(Regions.US_WEST_2)
         val request = SendEmailRequest()
                 .withDestination(
-                        Destination().withToAddresses(toAddress))
+                        Destination().withToAddresses(participant.email))
                 .withMessage(Message()
                         .withBody(Body()
-                                .withHtml(Content()
-                                        .withCharset("UTF-8").withData(htmlBody))
                                 .withText(Content()
                                         .withCharset("UTF-8").withData(textBody)))
                         .withSubject(Content()
                                 .withCharset("UTF-8").withData(subject)))
                 .withSource(FROM_ADDRESS)
-
 
         try {
             client.sendEmail(request)
