@@ -4,6 +4,10 @@ body {
     flex-direction: column;
 }
 
+.container {
+    padding-top: 20px;
+    overflow: hidden;
+}
 
 .xs.six.columns {
     width: 48%;
@@ -18,7 +22,6 @@ body {
 }
 
 /* Header */
-
 body > .content {
     flex: 1;
 }
@@ -72,10 +75,21 @@ input.error, input.error:focus {
     font-weight: 700;
 }
 
-/* Images */
-
-#title, #date, #content, #information, #Access {
+/* Contents */
+.content {
     text-align: center;
+    margin-bottom: 40px;
+}
+
+.picture {
+    width: 100vw;
+    margin: 0 -20px;
+}
+
+@media (min-width: 400px) {
+    .picture {
+        margin: 0 -7.5%;
+    }
 }
 
 #title {
@@ -84,23 +98,122 @@ input.error, input.error:focus {
     justify-content: center;
     align-items: center;
     min-height: 100vw; /* 正方形にする */
-    background-image: url("/img/bg5.png");
+    background-image: url("/img/bg5-400@2x.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+
+    line-height: 1;
+}
+
+@media (min-width: 400px) {
+    #title {
+        background-image: url("/img/bg5-1000@2x.png");
+    }
+}
+
+@media (min-width: 1000px) {
+    #title {
+        background-image: url("/img/bg5.png");
+    }
 }
 
 #title p {
     margin: 0;
 }
 
-.picture {
-    margin: 0 -20px;
+#date {
+    margin-top: -20px;
+    font-size: 4.0rem;
+}
+
+#date #dayOfWeek {
+    font-size: 2.0rem;
+}
+
+#content {
+    background-image: url("/img/bg1.png"), url("/img/bg2.png");
+    background-repeat: no-repeat;
+    background-position: -5% top, 130% bottom;
+    background-size: 20%, 40%;
+    margin: 0 -20px 40px;
+    padding: 0 20px;
 }
 
 #information {
+    min-height: 80vw; /* 正方形にする */
     background-image: url("/img/bg3.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    /* filter: saturate(50%) brightness(150%); */
+}
+
+#map {
+    width: calc(100% + 40px);
+    height: 300px;
+    margin: 0 -20px;
+}
+
+#rsvp {
+    background-image: url("/img/bg2.png"), url("/img/bg4.png");
+    background-repeat: no-repeat;
+    background-position: -20% bottom, 120% top;
+    background-size: 40%;
+    margin: 0 -20px 40px;
+    padding: 0 20px;
+}
+
+
+/* Typography */
+@font-face {
+    font-family: "Palatino-Bold";
+    src: url("/font/palatino-bold.ttf");
+}
+
+@font-face {
+    font-family: "Palatino-Roman";
+    src: url("/font/palatino-roman.ttf");
+}
+
+body {
+    font-family: serif;
+}
+
+.palatino.bold {
+    font-family: "Palatino-Bold", serif;
+}
+
+.palatino.roman {
+    font-family: "Palatino-Roman", serif;
+}
+
+.hand-writing {
+    font-family: 'Great Vibes', cursive;
+}
+
+.gray {
+    color: #9B9B9B;
+}
+
+.gray-border {
+    color: #4A4A4A;
+    -webkit-text-stroke: 1px #979797;
+    /* font-size: 24px; */
+}
+
+.short-height {
+    line-height: 0.4;
+}
+
+.rem2 {
+    font-size: 2rem;
+}
+
+.rem3 {
+    font-size: 3rem;
+}
+
+#invitation {
+    margin: -0.5rem 0 1rem 8rem;
 }

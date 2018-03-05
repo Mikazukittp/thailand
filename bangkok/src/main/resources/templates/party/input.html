@@ -6,21 +6,28 @@
 <header sec:authorize="hasRole('USER')" th:replace="common/header :: common_header"></header>
 <div class="container">
 
-    <h1 id="title">
-        <span>WEDDING</span>
-        <span>Invitation</span>
-        <span>NORIHITO</span>
-        <span>&</span>
-        <span>ERI</span>
+    <h1 id="title" class="content">
+        <span class="palatino bold ">WEDDING</span>
+        <span id="invitation" class="hand-writing">Invitation</span>
+        <span class="palatino roman gray-border rem3">NORIHITO</span>
+        <span class="hand-writing gray short-height">&</span>
+        <span class="palatino roman gray-border rem3">ERI</span>
     </h1>
 
-    <div id="date">
-        <span th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</span><span id="dayOfWeek">Sat.</span>
+    <div id="date" class="content">
+        <span class="hand-writing" th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</span>
+        <span id="dayOfWeek" class="hand-writing">Sun.</span>
     </div>
 
-    <img id="catch" class="picture" src="/img/pic1.png"/>
+    <picture id="catch" class="picture">
+        <source media="(min-width: 1000px)"
+                srcset="/img/pic1.png"/>
+        <source media="(min-width: 400)"
+                srcset="/img/pic1-1000.png, /img/pic1-1000@2x.png 2x"/>
+        <img src="/img/pic1-400.png" srcset="/img/pic1-400.png, /img/pic1-400@2x.png 2x"/>
+    </picture>
 
-    <div id="content">
+    <div id="content" class="content">
         <h2>Just Married</h2>
         この度、結婚式を執り行うこととなりました。<br/>
         <br/>
@@ -29,31 +36,56 @@
         ささやかながら小宴を<br/>
         もうけせていただきました。<br/>
         ご多用中誠に恐縮ではございますが、<br/>
-        ご出席いただきたくご案内申しあげます。  2018年MM月DD日<br/>
-        新郎氏名　新婦氏名<br/>
+        ご出席いただきたくご案内申しあげます。  2018年3月吉日<br/>
+        木村憲仁　福田恵里<br/>
     </div>
 
-    <div id="information">
+    <div id="information" class="content">
         <h2>Information</h2>
-        <p><span th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</span><span id="dayOfWeek">Sat.</span>
+        <p>
+            <span class="rem2" th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</span>
+            <span class="rem2" id="dayOfWeek">Sat.</span><br/>
+            <span>Open 17:00</span><br/>
+            <span>Start 17:30</span><br/>
         </p>
-        <p>Open 17:00</p>
-        <p>Start 17:30</p>
-        <p th:text="${place.name}">Place Name</p>
-        <p th:text="${place.address}">住所</p>
+        <p>
+            <!--<span class="rem2" th:text="${place.name}">Place Name</span><br/>-->
+            <span class="rem2">TRUNK<br/>by SHOTO GALLERY</span><br/>
+            <span th:text="${place.address}">住所</span>
+        </p>
     </div>
 
-    <div id="access">
+    <div id="access" class="content">
         <h2>Access</h2>
+        <iframe id="map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.62643990721!2d139.6935293156562!3d35.66157428019894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188cabe5baf157%3A0x2bc2af9dbf4eb36f!2sTRUNK+BY+SHOTO+GALLERY!5e0!3m2!1sja!2sjp!4v1520267002800"
+                frameborder="0" style="border:0" allowfullscreen></iframe>
+        <p>
+            <b>電車でお越しの方</b><br/>
+            半蔵門線・銀座線・JR・東急東横線・田園都市線<br/>
+            渋谷駅より徒歩5分<br/>
+            <br/>
+            <b>お車でお越しの方</b><br/>
+            首都高速3号線渋谷IC下車、文化村方面5分<br/>
+            駐車場 近隣利用(有料)<br/>
+        </p>
     </div>
 
-    <img class="picture" src="/img/pic2.png"/>
 
-    <div id="rsvp">
+    <picture class="picture">
+        <source media="(min-width: 1000px)"
+                srcset="/img/pic2.png"/>
+        <source media="(min-width: 400)"
+                srcset="/img/pic2-1000.png, /img/pic2-1000@2x.png 2x"/>
+        <img src="/img/pic2-400.png" srcset="/img/pic2-400.png, /img/pic2-400@2x.png 2x"/>
+    </picture>
+
+
+    <div id="rsvp" class="content">
         <h2>R.S.V.P</h2>
         誠にお手数ではございますが<br/>
         当日のご都合の程を以下の回答フォームより<br/>
-        MM月DD日(W)までに<br/>
+        4月8日(日)までに<br/>
         出席情報のご登録をお願い申し上げます。<br/>
         <br/>
         また、当日のお食事のご用意にあたり<br/>
@@ -65,6 +97,10 @@
     </div>
 
     <form method="post" th:action="@{'/parties/' + ${hash}}" th:object="${form}">
+        <p>
+            <small>* 必須項目</small>
+        </p>
+
         <div class="row">
             <div class="xs six columns">
                 <span class="error-msg" th:if="${#fields.hasErrors('lastName')}"

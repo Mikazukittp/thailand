@@ -1,23 +1,23 @@
 CREATE TABLE users (
   id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  name varchar(100) NOT NULL,
+  name varchar(100) NOT NULL UNIQUE KEY,
   email varchar(100) NOT NULL,
   password varchar(100) NOT NULL
 );
 
-CREATE TABLE statuses (
-  id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  user_id int NOT NULL,
-  plan_id int NOT NULL,
-  status int NOT NULL
-);
-
-CREATE TABLE plans (
-  id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  name varchar(100) NOT NULL,
-  price int NOT NULL
-);
-
+-- CREATE TABLE statuses (
+--   id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+--   user_id int NOT NULL,
+--   plan_id int NOT NULL,
+--   status int NOT NULL
+-- );
+-- 
+-- CREATE TABLE plans (
+--   id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+--   name varchar(100) NOT NULL,
+--   price int NOT NULL
+-- );
+-- 
 CREATE TABLE parties (
   id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
   user_id int NOT NULL,
@@ -26,8 +26,12 @@ CREATE TABLE parties (
   date Date NOT NULL,
   m_price int NOT NULL,
   f_price int NOT NULL,
-  hash varchar(128) UNIQUE NOT NULL
+  -- 本当はcustomizesの方にあるべき？
+  hash varchar(128) NOT NULL UNIQUE KEY
 );
+
+ALTER TABLE parties ADD INDEX user_id(user_id);
+ALTER TABLE parties ADD INDEX place_id(place_id);
 
 CREATE TABLE places (
   id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -37,27 +41,27 @@ CREATE TABLE places (
   url varchar(100) NOT NULL
 );
 
-CREATE TABLE customizes (
-  id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  party_id int NOT NULL,
-  template_id int NOT NULL,
-  photo_url_1 varchar(800),
-  photo_url_2 varchar(800),
-  photo_url_3 varchar(800),
-  photo_url_4 varchar(800),
-  photo_url_5 varchar(800),
-  message_1 varchar(800),
-  message_2 varchar(800),
-  message_3 varchar(800),
-  message_4 varchar(800),
-  message_5 varchar(800)
-);
-
-CREATE TABLE templates (
-  id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  name varchar(100) NOT NULL,
-  file_url varchar(100) NOT NULL
-);
+-- CREATE TABLE customizes (
+--   id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+--   party_id int NOT NULL,
+--   template_id int NOT NULL,
+--   photo_url_1 varchar(800),
+--   photo_url_2 varchar(800),
+--   photo_url_3 varchar(800),
+--   photo_url_4 varchar(800),
+--   photo_url_5 varchar(800),
+--   message_1 varchar(800),
+--   message_2 varchar(800),
+--   message_3 varchar(800),
+--   message_4 varchar(800),
+--   message_5 varchar(800)
+-- );
+-- 
+-- CREATE TABLE templates (
+--   id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+--   name varchar(100) NOT NULL,
+--   file_url varchar(100) NOT NULL
+-- );
 
 CREATE TABLE participants (
   id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -71,8 +75,11 @@ CREATE TABLE participants (
   message varchar(100),
   postal_code varchar(100),
   address varchar(100),
-  phone varchar(100)
+  phone varchar(100),
+  hash varchar(32) NOT NULL UNIQUE KEY
 );
+
+ALTER TABLE participants ADD INDEX party_id(party_id);
 
 -- ====================
 -- データ投入
@@ -83,14 +90,17 @@ INSERT INTO users (
   email,
   password
 ) VALUES (
-  'kimura', 'k.haijima@gmail.com', 'password'
+  'norieri', 'norihito20@gmail.com', '$2a$10$LtAu/zx522X2i7vYHgPpo.QG5WY9zLSEwS0XGwJ5rR7Sen3hOPCMi'
 );
 
-INSERT INTO plans (
+INSERT INTO places (
   name,
-  price
+  address,
+  phone,
+  url
 ) VALUES (
-  'free', 0
+  'TRUNK BY SHOTO GALLERY', '〒150-0046 東京都渋谷区松濤1丁目5−4', '03-5784-1060
+', 'https://trunk-shoto.com/'
 );
 
 INSERT INTO parties (
@@ -102,27 +112,27 @@ INSERT INTO parties (
   f_price,
   hash
 ) VALUES (
-  1, 1, '木村・福田家披露宴二次会', '2018-04-22', 8000, 6000, 'qwertyuiop'
+  1, 1, '木村・福田家披露宴二次会', '2018-04-22', 8000, 6000, '9BKviZmm'
 );
 
-INSERT INTO participants (
-  party_id,
-  first_name,
-  last_name,
-  email,
-  gender,
-  side,
-  attendance,
-  message,
-  postal_code,
-  address,
-  phone
-) VALUES (
-  1, '一樹', '朏島', 'k.haijima@gmail.com', 1, 1, 1, 'おめでとー', NULL, NULL, NULL
-), (
-  1, '優作', '徳永', 'yusaku.tokunaga@gmail.com', 1, 1, 1, NULL, NULL, NULL, NULL  
-), (
-  1, 'じゅん','', '', 0, 0, 1, NULL, NULL, NULL, NULL  
-);
+-- INSERT INTO participants (
+--   party_id,
+--   first_name,
+--   last_name,
+--   email,
+--   gender,
+--   side,
+--   attendance,
+--   message,
+--   postal_code,
+--   address,
+--   phone
+-- ) VALUES (
+--   1, '一樹', '朏島', 'k.haijima@gmail.com', 1, 1, 1, 'おめでとー', NULL, NULL, NULL
+-- ), (
+--   1, '優作', '徳永', 'yusaku.tokunaga@gmail.com', 1, 1, 1, NULL, NULL, NULL, NULL  
+-- ), (
+--   1, 'じゅん','', '', 0, 0, 1, NULL, NULL, NULL, NULL  
+-- );
 
 COMMIT;
