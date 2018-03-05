@@ -1,5 +1,9 @@
 spring:
   main:
     banner-mode: "off"
+  datasource:
+    url: jdbc:mysql://thailand.cuxsreyhnutn.ap-northeast-1.rds.amazonaws.com/thailand
+    username: webapp
 server:
   port: 80
+domain: "http://eo-wedding.com"

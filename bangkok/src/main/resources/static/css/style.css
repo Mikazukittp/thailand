@@ -1,0 +1,106 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+
+.xs.six.columns {
+    width: 48%;
+}
+
+.xs.column, .xs.columns {
+    margin-left: 4%;
+}
+
+.xs.column:first-child, .columns:first-child {
+    margin-left: 0;
+}
+
+/* Header */
+
+body > .content {
+    flex: 1;
+}
+
+header {
+    padding: 8px 0;
+    background-color: #666;
+    color: #fff;
+}
+
+header .header-list {
+    display: flex;
+    margin: 0;
+    list-style: none;
+    justify-content: flex-end;
+}
+
+header .header-list li {
+    margin: 0;
+    padding-left: 8px;
+}
+
+header .header-list form {
+    margin: 0;
+}
+
+header .header-list input[type=submit] {
+    display: inline;
+    height: auto;
+    padding: 0;
+    color: inherit;
+    text-align: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    border-radius: 0;
+    border: none;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/* Input */
+input.error, input.error:focus {
+    border-color: #f00;
+}
+
+.error-msg {
+    color: #f00;
+    font-weight: 700;
+}
+
+/* Images */
+
+#title, #date, #content, #information, #Access {
+    text-align: center;
+}
+
+#title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vw; /* 正方形にする */
+    background-image: url("/img/bg5.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#title p {
+    margin: 0;
+}
+
+.picture {
+    margin: 0 -20px;
+}
+
+#information {
+    background-image: url("/img/bg3.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}

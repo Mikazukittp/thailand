@@ -1,22 +1,19 @@
 package app.mikazuki.thailand.user
 
-import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity(name = "users")
 data class User(
-        @Id @GeneratedValue
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long = -1,
         val name: String,
         val email: String,
         @Column(name = "password")
-        val hashedPassword: String
-) : UserDetails {
-    override fun getAuthorities() = mutableListOf<GrantedAuthority>()
+        val hashedPassword: String) : UserDetails {
+
+    override fun getAuthorities() = mutableListOf(SimpleGrantedAuthority("ROLE_USER"))
 
     override fun getUsername() = name
 

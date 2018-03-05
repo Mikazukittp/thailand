@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="common/head :: common_head('出欠入力')"></div>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:replace="common/head :: common_head('出欠入力完了')"></div>
 <body>
-<div th:include="common/header :: common_header"></div>
+<header sec:authorize="hasRole('USER')" th:replace="common/header :: common_header"></header>
 <div class="container">
     <p>Complete registration</p>
 </div>
-<div th:include="common/footer :: common_footer"></div>
+<footer th:replace="common/footer :: common_footer"></footer>
 </body>
 </html>

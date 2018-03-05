@@ -1,76 +1,153 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:replace="common/head :: common_head('出欠入力')"></div>
 <body>
-<div th:include="common/header :: common_header"></div>
+<header sec:authorize="hasRole('USER')" th:replace="common/header :: common_header"></header>
 <div class="container">
-    <h1 th:text="${party.name}">aaa</h1>
-    <p th:text="${validationError}">validationError</p>
-    <form method="post" th:action="@{'/parties/' + ${hash} + '/confirm'}" th:object="${form}">
 
+    <h1 id="title">
+        <span>WEDDING</span>
+        <span>Invitation</span>
+        <span>NORIHITO</span>
+        <span>&</span>
+        <span>ERI</span>
+    </h1>
+
+    <div id="date">
+        <span th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</span><span id="dayOfWeek">Sat.</span>
+    </div>
+
+    <img id="catch" class="picture" src="/img/pic1.png"/>
+
+    <div id="content">
+        <h2>Just Married</h2>
+        この度、結婚式を執り行うこととなりました。<br/>
+        <br/>
+        日頃お世話になっておりますみなさまに<br/>
+        私どもの門出をお見守りいただきたく、<br/>
+        ささやかながら小宴を<br/>
+        もうけせていただきました。<br/>
+        ご多用中誠に恐縮ではございますが、<br/>
+        ご出席いただきたくご案内申しあげます。  2018年MM月DD日<br/>
+        新郎氏名　新婦氏名<br/>
+    </div>
+
+    <div id="information">
+        <h2>Information</h2>
+        <p><span th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</span><span id="dayOfWeek">Sat.</span>
+        </p>
+        <p>Open 17:00</p>
+        <p>Start 17:30</p>
+        <p th:text="${place.name}">Place Name</p>
+        <p th:text="${place.address}">住所</p>
+    </div>
+
+    <div id="access">
+        <h2>Access</h2>
+    </div>
+
+    <img class="picture" src="/img/pic2.png"/>
+
+    <div id="rsvp">
+        <h2>R.S.V.P</h2>
+        誠にお手数ではございますが<br/>
+        当日のご都合の程を以下の回答フォームより<br/>
+        MM月DD日(W)までに<br/>
+        出席情報のご登録をお願い申し上げます。<br/>
+        <br/>
+        また、当日のお食事のご用意にあたり<br/>
+        アレルギー等がある方はメッセージ欄に<br/>
+        ご記入くださいますようお願い申し上げます。<br/>
+        <br/>
+        当日会場で皆様にお会いできますことを<br/>
+        新郎新婦ともども楽しみにしております。<br/>
+    </div>
+
+    <form method="post" th:action="@{'/parties/' + ${hash}}" th:object="${form}">
         <div class="row">
-            <div class="six columns">
-                <label for="sei">姓</label>
-                <input id="sei" class="u-full-width" type="text" th:field="*{lastName}" autocomplete="family-name"/>
+            <div class="xs six columns">
+                <span class="error-msg" th:if="${#fields.hasErrors('lastName')}"
+                      th:errors="*{lastName}">Name error</span>
             </div>
-            <div class="six columns">
-                <label for="sei">名</label>
-                <input id="mei" class="u-full-width" type="text" th:field="*{firstName}" autocomplete="given-name"/>
+            <div class="xs six columns">
+                <span class="error-msg" th:if="${#fields.hasErrors('firstName')}"
+                      th:errors="*{firstName}">Name error</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="xs six columns">
+                <label for="sei">* 姓</label>
+                <input id="sei" class="u-full-width" type="text" th:field="*{lastName}" th:errorclass="error"
+                       autocomplete="family-name"/>
+            </div>
+            <div class="xs six columns">
+                <label for="sei">* 名</label>
+                <input id="mei" class="u-full-width" type="text" th:field="*{firstName}" th:errorclass="error"
+                       autocomplete="given-name"/>
             </div>
         </div>
 
-        <label for="email">E-mail</label>
-        <input id="email" class="u-full-width" type="email" th:field="*{email}"/>
+        <span class="error-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name error</span>
+        <label for="email">* E-mail</label>
+        <input id="email" class="u-full-width" type="email" th:field="*{email}" th:errorclass="error"/>
 
         <div class="row">
-            <label class="six columns">
-                <input type="radio" name="attendance" th:value="${true}" th:field="*{attendance}"/>
+            <label class="xs six columns">
+                <input type="radio" name="attendance" th:value="${true}" th:field="*{attendance}"
+                       th:errorclass="error"/>
                 <span class="label-body">出席</span>
             </label>
-            <label class="six columns">
-                <input type="radio" name="attendance" th:value="${false}" th:field="*{attendance}"/>
+            <label class="xs six columns">
+                <input type="radio" name="attendance" th:value="${false}" th:field="*{attendance}"
+                       th:errorclass="error"/>
                 <span class="label-body">欠席</span>
             </label>
         </div>
 
         <div class="row">
-            <label class="six columns">
-                <input type="radio" name="gender" th:value="${true}" th:field="*{gender}"/>
+            <label class="xs six columns">
+                <input type="radio" name="gender" th:value="${true}" th:field="*{gender}" th:errorclass="error"/>
                 <span class="label-body">男性</span>
             </label>
-            <label class="six columns">
-                <input type="radio" name="gender" th:value="${false}" th:field="*{gender}"/>
+            <label class="xs six columns">
+                <input type="radio" name="gender" th:value="${false}" th:field="*{gender}" th:errorclass="error"/>
                 <span class="label-body">女性</span>
             </label>
         </div>
 
         <div class="row">
-            <label class="six columns">
-                <input type="radio" name="side" th:value="${true}" th:field="*{side}"/>
+            <label class="xs six columns">
+                <input type="radio" name="side" th:value="${true}" th:field="*{side}" th:errorclass="error"/>
                 <span class="label-body">新郎側ゲスト</span>
             </label>
-            <label class="six columns">
-                <input type="radio" name="side" th:value="${false}" th:field="*{side}"/>
+            <label class="xs six columns">
+                <input type="radio" name="side" th:value="${false}" th:field="*{side}" th:errorclass="error"/>
                 <span class="label-body">新婦側ゲスト</span>
             </label>
         </div>
 
+        <span class="error-msg" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}">Name error</span>
         <label for="postal-code">郵便番号</label>
-        <input id="postal-code" class="u-full-width" type="text" th:field="*{postalCode}" autocomplete="postal-code"/>
+        <div class="row">
+            <input id="postal-code" class="three columns" type="text" th:field="*{postalCode}" th:errorclass="error"
+                   autocomplete="postal-code"/>
+        </div>
 
+        <span class="error-msg" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Name error</span>
         <label for="address">住所</label>
-        <input id="address" class="u-full-width" type="text" th:field="*{address}"/>
+        <input id="address" class="u-full-width" type="text" th:field="*{address}" th:errorclass="error"/>
 
         <label for="phone">電話番号</label>
-        <input id="phone" class="u-full-width" type="tel" th:field="*{phone}"/>
+        <input id="phone" class="u-full-width" type="tel" th:field="*{phone}" th:errorclass="error"/>
 
         <label for="message">お祝いメッセージ</label>
-        <textarea id="message" class="u-full-width" th:field="*{message}"></textarea>
+        <textarea id="message" class="u-full-width" th:field="*{message}" th:errorclass="error"></textarea>
 
         <input class="u-full-width" type="submit" value="確認"/>
     </form>
 </div>
 
-<div th:include="common/footer :: common_footer"></div>
+<footer th:replace="common/footer :: common_footer"></footer>
 </body>
 </html>

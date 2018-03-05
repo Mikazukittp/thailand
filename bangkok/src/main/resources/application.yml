@@ -6,3 +6,4 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   thymeleaf:
     cache: false
+domain: "http://localhost:8080"

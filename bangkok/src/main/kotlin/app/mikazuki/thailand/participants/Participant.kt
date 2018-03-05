@@ -2,11 +2,12 @@ package app.mikazuki.thailand.participants
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity(name = "participants")
 data class Participant(
-        @Id @GeneratedValue
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long = -1,
         val partyId: Long,
         val firstName: String,
@@ -18,5 +19,6 @@ data class Participant(
         val postalCode: String?,
         val message: String?,
         val address: String?,
-        val phone: String?)
+        val phone: String?,
+        val hash: String)
 
