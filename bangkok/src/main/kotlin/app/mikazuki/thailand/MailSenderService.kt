@@ -11,43 +11,44 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.MessageSource
 import org.springframework.stereotype.Service
 import java.io.UnsupportedEncodingException
+import java.util.*
 import javax.mail.internet.InternetAddress
 
 @Service
 class MailSenderService {
 
     @Autowired
-    lateinit var messageSource : MessageSource
+    lateinit var messageSource: MessageSource
 
-    @Value("\${aws.ses.accesskey}")
+    @Value("\${aws.ses.accesskey:}")
     lateinit var ACCESS_KEY: String
 
-    @Value("\${aws.ses.secretkey}")
+    @Value("\${aws.ses.secretkey:}")
     lateinit var SECRET_ACCESS_KEY: String
 
     private val FROM_ADDRESS = "eo.wedding.beta@gmail.com"
 
     fun send(party: Party, participant: Participant) {
 
-        val subject =  messageSource.getMessage("confirmed.message.title", null, null)
+        val subject = messageSource.getMessage("confirmed.message.title", null, Locale.JAPAN)
         var url = "http://eo-wedding.com/parties/" + party.hash
-        var userName =  participant.lastName + " " + participant.firstName
+        var userName = participant.lastName + " " + participant.firstName
         val attendance = if (participant.attendance) "出席" else "欠席"
 
-        var messageProperties = arrayOf(userName, party.name, url, participant.postalCode,participant.address, participant.email, attendance)
-        val textBody = messageSource.getMessage("confirmed.message.body.detail", messageProperties, null) + messageSource.getMessage("confirmed.message.footer",null,null)
+        var messageProperties = arrayOf(userName, party.name, url, participant.postalCode, participant.address, participant.email, attendance)
+        val textBody = messageSource.getMessage("confirmed.message.body.detail", messageProperties, Locale.JAPAN) + messageSource.getMessage("confirmed.message.footer", null, Locale.JAPAN)
         val client = AmazonSimpleEmailServiceClient(BasicAWSCredentials(ACCESS_KEY, SECRET_ACCESS_KEY))
-                .withRegion<AmazonSimpleEmailServiceClient>(Regions.US_WEST_2)
+            .withRegion<AmazonSimpleEmailServiceClient>(Regions.US_WEST_2)
         val request = SendEmailRequest()
-                .withDestination(
-                        Destination().withToAddresses(participant.email))
-                .withMessage(Message()
-                        .withBody(Body()
-                                .withText(Content()
-                                        .withCharset("UTF-8").withData(textBody)))
-                        .withSubject(Content()
-                                .withCharset("UTF-8").withData(subject)))
-                .withSource(senderAddressBuilder(FROM_ADDRESS,messageSource.getMessage("confirmed.message.sender", null,null)))
+            .withDestination(
+                    Destination().withToAddresses(participant.email))
+            .withMessage(Message()
+                .withBody(Body()
+                    .withText(Content()
+                        .withCharset("UTF-8").withData(textBody)))
+                .withSubject(Content()
+                    .withCharset("UTF-8").withData(subject)))
+            .withSource(senderAddressBuilder(FROM_ADDRESS, messageSource.getMessage("confirmed.message.sender", null, Locale.JAPAN)))
 
         try {
             client.sendEmail(request)

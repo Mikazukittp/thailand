@@ -1,5 +1,6 @@
 package app.mikazuki.thailand.party
 
+import app.mikazuki.thailand.MailSenderService
 import app.mikazuki.thailand.participants.ParticipantForm
 import app.mikazuki.thailand.participants.ParticipantService
 import app.mikazuki.thailand.participants.toParticipant
@@ -16,7 +17,8 @@ import javax.validation.Valid
 @Controller
 class PartyController @Autowired constructor(private val partyService: PartyService,
                                              private val placeService: PlaceService,
-                                             private val participantService: ParticipantService) {
+                                             private val participantService: ParticipantService,
+                                             private val mailService: MailSenderService) {
 
     @GetMapping("")
     fun input(@PathVariable("hash") hash: String,
@@ -62,6 +64,7 @@ class PartyController @Autowired constructor(private val partyService: PartyServ
 
         val participant = form.toParticipant(party.id)
         participantService.save(participant)
+        mailService.send(party, participant)
         return ModelAndView("party/complete")
     }
 
