@@ -6,23 +6,26 @@
 <header sec:authorize="hasRole('USER')" th:replace="common/header :: common_header"></header>
 <div class="container">
 
+    <p class="alert" th:classappend="${'alert-' + message.type}" th:if="${message != null}" th:utext="${message.body}">
+        メッセージ</p>
+
     <h1 id="title" class="content">
-        <span class="palatino bold ">WEDDING</span>
+        <span class="transitional">WEDDING</span>
         <span id="invitation" class="hand-writing">Invitation</span>
-        <span class="palatino roman gray-border rem3">NORIHITO</span>
+        <span class="transitional gray-border rem3">NORIHITO</span>
         <span class="hand-writing gray short-height">&</span>
-        <span class="palatino roman gray-border rem3">ERI</span>
+        <span class="transitional gray-border rem3">ERI</span>
     </h1>
 
     <div id="date" class="content">
         <span class="hand-writing" th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</span>
-        <span id="dayOfWeek" class="hand-writing">Sun.</span>
+        <span class="hand-writing day-of-week">Sun.</span>
     </div>
 
     <picture id="catch" class="picture">
         <source media="(min-width: 1000px)"
                 srcset="/img/pic1.png"/>
-        <source media="(min-width: 400)"
+        <source media="(min-width: 400px)"
                 srcset="/img/pic1-1000.png, /img/pic1-1000@2x.png 2x"/>
         <img src="/img/pic1-400.png" srcset="/img/pic1-400.png, /img/pic1-400@2x.png 2x"/>
     </picture>
@@ -34,9 +37,11 @@
         日頃お世話になっておりますみなさまに<br/>
         私どもの門出をお見守りいただきたく、<br/>
         ささやかながら小宴を<br/>
-        もうけせていただきました。<br/>
+        もうけせていただきました<br/>
         ご多用中誠に恐縮ではございますが、<br/>
-        ご出席いただきたくご案内申しあげます。  2018年3月吉日<br/>
+        ご出席いただきたくご案内申しあげます<br/>
+        2018年3月吉日<br/>
+        <br/>
         木村憲仁　福田恵里<br/>
     </div>
 
@@ -44,7 +49,7 @@
         <h2>Information</h2>
         <p>
             <span class="rem2" th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</span>
-            <span class="rem2" id="dayOfWeek">Sat.</span><br/>
+            <span class="rem2 day-of-week">Sun.</span><br/>
             <span>Open 17:00</span><br/>
             <span>Start 17:30</span><br/>
         </p>
@@ -75,7 +80,7 @@
     <picture class="picture">
         <source media="(min-width: 1000px)"
                 srcset="/img/pic2.png"/>
-        <source media="(min-width: 400)"
+        <source media="(min-width: 400px)"
                 srcset="/img/pic2-1000.png, /img/pic2-1000@2x.png 2x"/>
         <img src="/img/pic2-400.png" srcset="/img/pic2-400.png, /img/pic2-400@2x.png 2x"/>
     </picture>
@@ -86,17 +91,17 @@
         誠にお手数ではございますが<br/>
         当日のご都合の程を以下の回答フォームより<br/>
         4月8日(日)までに<br/>
-        出席情報のご登録をお願い申し上げます。<br/>
+        出席情報のご登録をお願い申し上げます<br/>
         <br/>
         また、当日のお食事のご用意にあたり<br/>
         アレルギー等がある方はメッセージ欄に<br/>
-        ご記入くださいますようお願い申し上げます。<br/>
+        ご記入くださいますようお願い申し上げます<br/>
         <br/>
         当日会場で皆様にお会いできますことを<br/>
-        新郎新婦ともども楽しみにしております。<br/>
+        新郎新婦ともども楽しみにしております<br/>
     </div>
 
-    <form method="post" th:action="@{'/parties/' + ${hash}}" th:object="${form}">
+    <form id="input" method="post" th:action="@{'/parties/' + ${hash}}" th:object="${form}">
         <p>
             <small>* 必須項目</small>
         </p>
@@ -183,7 +188,6 @@
         <input class="u-full-width" type="submit" value="確認"/>
     </form>
 </div>
-
 <footer th:replace="common/footer :: common_footer"></footer>
 </body>
 </html>

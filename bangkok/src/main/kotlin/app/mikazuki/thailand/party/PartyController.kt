@@ -7,10 +7,11 @@ import app.mikazuki.thailand.participants.toParticipant
 import app.mikazuki.thailand.place.PlaceService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
+import org.springframework.ui.ModelMap
 import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.servlet.ModelAndView
+import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import javax.validation.Valid
 
 @RequestMapping("/parties/{hash}")
@@ -23,49 +24,50 @@ class PartyController @Autowired constructor(private val partyService: PartyServ
     @GetMapping("")
     fun input(@PathVariable("hash") hash: String,
               @ModelAttribute("form") form: ParticipantForm,
-              mav: ModelAndView): ModelAndView {
+              model: ModelMap): String {
         val party = partyService.findByHash(hash)
-        party ?: return ModelAndView("index")
-
-        mav.viewName = "party/input"
-        mav.addObject("party", party)
+        party ?: return "index"
+        model.addAttribute("party", party)
         val place = placeService.findById(party.placeId).get()
-        mav.addObject("place", place)
-        mav.addObject("hash", hash)
-        return mav
+        model.addAttribute("place", place)
+        model.addAttribute("hash", hash)
+        return "party/input"
     }
 
     @PostMapping("")
     fun confirm(@PathVariable("hash") hash: String,
                 @ModelAttribute("form") @Valid form: ParticipantForm,
                 result: BindingResult,
-                mav: ModelAndView): ModelAndView {
+                model: ModelMap): String {
         if (result.hasErrors()) {
-            mav.addObject("validationError", "不正な値が入力されました。")
-            return input(hash, form, mav)
+            model.addAttribute("message", Message("danger", "入力エラーです"))
+            return input(hash, form, model)
         }
 
         val party = partyService.findByHash(hash)
-        party ?: return ModelAndView("index")
+        party ?: return "index"
 
-        mav.viewName = "party/confirm"
-        mav.addObject("party", party)
+        model.addAttribute("party", party)
         val place = placeService.findById(party.placeId).get()
-        mav.addObject("place", place)
-        mav.addObject("hash", hash)
-        return mav
+        model.addAttribute("place", place)
+        model.addAttribute("hash", hash)
+        return "party/confirm"
     }
 
     @PostMapping("/complete")
     fun complete(@PathVariable("hash") hash: String,
-                 @Validated form: ParticipantForm): ModelAndView {
+                 @Validated form: ParticipantForm,
+                 attributes: RedirectAttributes): String {
         val party = partyService.findByHash(hash)
         party ?: throw IllegalStateException("Invalid party")
 
         val participant = form.toParticipant(party.id)
         participantService.save(participant)
         mailService.send(party, participant)
-        return ModelAndView("party/complete")
+        attributes.addFlashAttribute("message", Message("success", "登録が完了いたしました<br/>登録内容をメールに送信したのでご確認ください"))
+        return "redirect:/parties/$hash"
     }
 
+    data class Message(val type: String,
+                       val body: String)
 }

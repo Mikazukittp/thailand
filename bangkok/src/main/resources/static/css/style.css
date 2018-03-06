@@ -4,75 +4,8 @@ body {
     flex-direction: column;
 }
 
-.container {
-    padding-top: 20px;
-    overflow: hidden;
-}
-
-.xs.six.columns {
-    width: 48%;
-}
-
-.xs.column, .xs.columns {
-    margin-left: 4%;
-}
-
-.xs.column:first-child, .columns:first-child {
-    margin-left: 0;
-}
-
-/* Header */
-body > .content {
+body > .container {
     flex: 1;
-}
-
-header {
-    padding: 8px 0;
-    background-color: #666;
-    color: #fff;
-}
-
-header .header-list {
-    display: flex;
-    margin: 0;
-    list-style: none;
-    justify-content: flex-end;
-}
-
-header .header-list li {
-    margin: 0;
-    padding-left: 8px;
-}
-
-header .header-list form {
-    margin: 0;
-}
-
-header .header-list input[type=submit] {
-    display: inline;
-    height: auto;
-    padding: 0;
-    color: inherit;
-    text-align: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
-    border-radius: 0;
-    border: none;
-    box-sizing: border-box;
-    margin: 0;
-}
-
-/* Input */
-input.error, input.error:focus {
-    border-color: #f00;
-}
-
-.error-msg {
-    color: #f00;
-    font-weight: 700;
 }
 
 /* Contents */
@@ -164,28 +97,14 @@ input.error, input.error:focus {
     padding: 0 20px;
 }
 
-
 /* Typography */
-@font-face {
-    font-family: "Palatino-Bold";
-    src: url("/font/palatino-bold.ttf");
-}
-
-@font-face {
-    font-family: "Palatino-Roman";
-    src: url("/font/palatino-roman.ttf");
-}
-
 body {
-    font-family: serif;
+    font-family: 'Libre Baskerville', serif;
 }
 
-.palatino.bold {
-    font-family: "Palatino-Bold", serif;
-}
-
-.palatino.roman {
-    font-family: "Palatino-Roman", serif;
+.transitional {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
 }
 
 .hand-writing {
@@ -216,4 +135,8 @@ body {
 
 #invitation {
     margin: -0.5rem 0 1rem 8rem;
+}
+
+.alert {
+    text-align: center;
 }

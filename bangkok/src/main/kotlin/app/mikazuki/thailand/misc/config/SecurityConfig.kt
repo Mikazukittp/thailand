@@ -24,6 +24,7 @@ class SecurityConfig @Autowired constructor(private val userDetailsService: User
             // @formatter:off
             it
                 .authorizeRequests()
+                .antMatchers("/").permitAll()
                 .antMatchers("/parties/**").permitAll()
                 .antMatchers("/login").anonymous()
                 .antMatchers("/logout").authenticated()
