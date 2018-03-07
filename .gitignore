@@ -28,3 +28,5 @@ bin
 *.swp
 *.bak
 
+# Node js
+node_modules/
