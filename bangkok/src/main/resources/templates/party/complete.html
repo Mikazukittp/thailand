@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<div th:replace="common/head :: common_head('出欠入力完了')"></div>
+<div th:replace="common/head :: common_head(${party.name})"></div>
 <body>
 <header sec:authorize="hasRole('USER')" th:replace="common/header :: common_header"></header>
 <div class="container">

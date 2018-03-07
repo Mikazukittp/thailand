@@ -112,7 +112,7 @@ INSERT INTO parties (
   f_price,
   hash
 ) VALUES (
-  1, 1, '木村・福田家披露宴二次会', '2018-04-22', 8000, 6000, '9BKviZmm'
+  1, 1, 'Nori & Eri\'s Wedding', '2018-04-22', 8000, 6000, '9BKviZmm'
 );
 
 -- INSERT INTO participants (

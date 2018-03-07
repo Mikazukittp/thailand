@@ -39,18 +39,6 @@ body > .container {
     line-height: 1;
 }
 
-@media (min-width: 400px) {
-    #title {
-        background-image: url("/img/bg5-1000@2x.png");
-    }
-}
-
-@media (min-width: 1000px) {
-    #title {
-        background-image: url("/img/bg5.png");
-    }
-}
-
 #title p {
     margin: 0;
 }
@@ -60,12 +48,12 @@ body > .container {
     font-size: 4.0rem;
 }
 
-#date #dayOfWeek {
-    font-size: 2.0rem;
+#date .day-of-week {
+    font-size: 0.6em; /* 相対指定 */
 }
 
 #content {
-    background-image: url("/img/bg1.png"), url("/img/bg2.png");
+    background-image: url("/img/bg1-400@2x.png"), url("/img/bg2-400@2x.png");
     background-repeat: no-repeat;
     background-position: -5% top, 130% bottom;
     background-size: 20%, 40%;
@@ -75,11 +63,10 @@ body > .container {
 
 #information {
     min-height: 80vw; /* 正方形にする */
-    background-image: url("/img/bg3.png");
+    background-image: url("/img/bg3-400@2x.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    /* filter: saturate(50%) brightness(150%); */
 }
 
 #map {
@@ -89,13 +76,44 @@ body > .container {
 }
 
 #rsvp {
-    background-image: url("/img/bg2.png"), url("/img/bg4.png");
+    background-image: url("/img/bg2-400@2x.png"), url("/img/bg4-400@2x.png");
     background-repeat: no-repeat;
     background-position: -20% bottom, 120% top;
     background-size: 40%;
     margin: 0 -20px 40px;
     padding: 0 20px;
 }
+
+@media (min-width: 400px) {
+    #title {
+        background-image: url("/img/bg5-1000@2x.png");
+    }
+    #content {
+        background-image: url("/img/bg1-1000@2x.png"), url("/img/bg2-1000@2x.png");
+    }
+    #information {
+        background-image: url("/img/bg3-1000@2x.png");
+    }
+    #rsvp {
+        background-image: url("/img/bg2-1000@2x.png"), url("/img/bg4-1000@2x.png");
+    }
+}
+
+@media (min-width: 1000px) {
+    #title {
+        background-image: url("/img/bg5.png");
+    }
+    #content {
+        background-image: url("/img/bg1.png"), url("/img/bg2.png");
+    }
+    #information {
+        background-image: url("/img/bg3.png");
+    }
+    #rsvp {
+        background-image: url("/img/bg2.png"), url("/img/bg4.png");
+    }
+}
+
 
 /* Typography */
 body {
@@ -117,8 +135,7 @@ body {
 
 .gray-border {
     color: #4A4A4A;
-    -webkit-text-stroke: 1px #979797;
-    /* font-size: 24px; */
+    -webkit-text-stroke: 0.5px #979797;
 }
 
 .short-height {
