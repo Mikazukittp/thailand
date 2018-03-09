@@ -10,17 +10,21 @@
         メッセージ</p>
 
     <h1 id="title" class="content">
-        <span class="transitional">WEDDING</span>
+        <span class="transitional">WEDDING<br/>AFTER PARTY</span>
         <span id="invitation" class="hand-writing">Invitation</span>
-        <span class="transitional gray-border rem3">NORIHITO</span>
-        <span class="hand-writing gray short-height">&</span>
-        <span class="transitional gray-border rem3">ERI</span>
+        <p>
+            <span class="transitional gray-border rem3">NORIHITO</span>
+            <span class="hand-writing gray short-height">&amp;</span>
+            <span class="transitional gray-border rem3">ERI</span>
+        </p>
     </h1>
 
     <div id="date" class="content">
         <span class="hand-writing" th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</span>
         <span class="hand-writing day-of-week">Sun.</span>
     </div>
+
+    <a href="http://eo-wedding.com/parties/9BKviZmm#rsvp" class="btn">出席連絡する</a>
 
     <picture id="catch" class="picture">
         <source media="(min-width: 1000px)"
@@ -32,17 +36,18 @@
 
     <div id="content" class="content">
         <h2>Just Married</h2>
-        この度、結婚式を執り行うこととなりました。<br/>
-        <br/>
-        日頃お世話になっておりますみなさまに<br/>
-        私どもの門出をお見守りいただきたく、<br/>
-        ささやかながら小宴を<br/>
-        もうけせていただきました<br/>
-        ご多用中誠に恐縮ではございますが、<br/>
-        ご出席いただきたくご案内申しあげます<br/>
-        2018年3月吉日<br/>
-        <br/>
-        木村憲仁　福田恵里<br/>
+        <p>
+            結婚式二次会のお知らせです<br/>
+            日頃お世話になっているみなさまへ<br/>
+            感謝の気持ちを込めて開催いたしますので、<br/>
+            ぜひご参加いただきたくご案内申し上げます<br/>
+            当日会場でお会いできることを、<br/>
+            心より楽しみにしております
+        </p>
+        <p>
+            2018年3月吉日<br/>
+            木村憲仁　福田恵里
+        </p>
     </div>
 
     <div id="information" class="content">
@@ -54,17 +59,18 @@
             <span>Start 17:30</span><br/>
         </p>
         <p>
-            <!--<span class="rem2" th:text="${place.name}">Place Name</span><br/>-->
             <span class="rem2">TRUNK<br/>by SHOTO GALLERY</span><br/>
             <span th:text="${place.address}">住所</span>
+        </p>
+        <p>
+            <span>会費制</span><br/>
+            <span>男性：8,000円</span><br/>
+            <span>女性：7,000円</span><br/>
         </p>
     </div>
 
     <div id="access" class="content">
         <h2>Access</h2>
-        <iframe id="map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.62643990721!2d139.6935293156562!3d35.66157428019894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188cabe5baf157%3A0x2bc2af9dbf4eb36f!2sTRUNK+BY+SHOTO+GALLERY!5e0!3m2!1sja!2sjp!4v1520267002800"
-                frameborder="0" style="border:0" allowfullscreen></iframe>
         <p>
             <b>電車でお越しの方</b><br/>
             半蔵門線・銀座線・JR・東急東横線・田園都市線<br/>
@@ -75,16 +81,9 @@
             駐車場 近隣利用(有料)<br/>
         </p>
     </div>
-
-
-    <picture class="picture">
-        <source media="(min-width: 1000px)"
-                srcset="/img/pic2.png"/>
-        <source media="(min-width: 400px)"
-                srcset="/img/pic2-1000.png, /img/pic2-1000@2x.png 2x"/>
-        <img src="/img/pic2-400.png" srcset="/img/pic2-400.png, /img/pic2-400@2x.png 2x"/>
-    </picture>
-
+    <iframe id="map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.62643990721!2d139.6935293156562!3d35.66157428019894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188cabe5baf157%3A0x2bc2af9dbf4eb36f!2sTRUNK+BY+SHOTO+GALLERY!5e0!3m2!1sja!2sjp!4v1520267002800"
+            frameborder="0" style="border:0" allowfullscreen></iframe>
 
     <div id="rsvp" class="content">
         <h2>R.S.V.P</h2>
@@ -92,13 +91,6 @@
         当日のご都合の程を以下の回答フォームより<br/>
         4月8日(日)までに<br/>
         出席情報のご登録をお願い申し上げます<br/>
-        <br/>
-        また、当日のお食事のご用意にあたり<br/>
-        アレルギー等がある方はメッセージ欄に<br/>
-        ご記入くださいますようお願い申し上げます<br/>
-        <br/>
-        当日会場で皆様にお会いできますことを<br/>
-        新郎新婦ともども楽しみにしております<br/>
     </div>
 
     <form id="input" method="post" th:action="@{'/parties/' + ${hash}}" th:object="${form}">
@@ -179,8 +171,8 @@
         <label for="address">住所</label>
         <input id="address" class="u-full-width" type="text" th:field="*{address}" th:errorclass="error"/>
 
-        <label for="phone">電話番号</label>
-        <input id="phone" class="u-full-width" type="tel" th:field="*{phone}" th:errorclass="error"/>
+        <!-- <label for="phone">電話番号</label> -->
+        <input id="phone" class="u-full-width" type="hidden" th:field="*{phone}" th:errorclass="error"/>
 
         <label for="message">お祝いメッセージ</label>
         <textarea id="message" class="u-full-width" th:field="*{message}" th:errorclass="error"></textarea>
