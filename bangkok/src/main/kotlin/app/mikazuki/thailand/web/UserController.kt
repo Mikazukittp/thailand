@@ -1,9 +1,10 @@
-package app.mikazuki.thailand.user
+package app.mikazuki.thailand.web
 
-import app.mikazuki.thailand.participants.Participant
-import app.mikazuki.thailand.participants.ParticipantService
-import app.mikazuki.thailand.party.PartyService
-import app.mikazuki.thailand.place.PlaceService
+import app.mikazuki.thailand.domain.participants.Participant
+import app.mikazuki.thailand.domain.participants.ParticipantService
+import app.mikazuki.thailand.domain.party.PartyService
+import app.mikazuki.thailand.domain.place.PlaceService
+import app.mikazuki.thailand.domain.user.User
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.access.AccessDeniedException

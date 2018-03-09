@@ -1,4 +1,4 @@
-package app.mikazuki.thailand.user
+package app.mikazuki.thailand.domain.user
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UserDetails

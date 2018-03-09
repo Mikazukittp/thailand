@@ -1,5 +1,6 @@
-package app.mikazuki.thailand.participants
+package app.mikazuki.thailand.web.form
 
+import app.mikazuki.thailand.domain.participants.Participant
 import org.apache.commons.lang3.RandomStringUtils
 import javax.validation.constraints.*
 

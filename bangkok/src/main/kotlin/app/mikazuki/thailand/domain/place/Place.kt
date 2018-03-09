@@ -1,4 +1,4 @@
-package app.mikazuki.thailand.place
+package app.mikazuki.thailand.domain.place
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue

@@ -1,4 +1,4 @@
-package app.mikazuki.thailand.participants
+package app.mikazuki.thailand.domain.participants
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue

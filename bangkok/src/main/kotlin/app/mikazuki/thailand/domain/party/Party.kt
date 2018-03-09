@@ -1,4 +1,4 @@
-package app.mikazuki.thailand.party
+package app.mikazuki.thailand.domain.party
 
 import java.sql.Date
 import javax.persistence.Entity

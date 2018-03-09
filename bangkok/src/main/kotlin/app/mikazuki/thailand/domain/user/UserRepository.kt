@@ -1,4 +1,4 @@
-package app.mikazuki.thailand.user
+package app.mikazuki.thailand.domain.user
 
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository

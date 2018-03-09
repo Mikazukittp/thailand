@@ -1,4 +1,4 @@
-package app.mikazuki.thailand.user
+package app.mikazuki.thailand.domain.user
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails

@@ -1,4 +1,4 @@
-package app.mikazuki.thailand.party
+package app.mikazuki.thailand.domain.party
 
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository

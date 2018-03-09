@@ -1,10 +1,11 @@
-package app.mikazuki.thailand.party
+package app.mikazuki.thailand.web
 
-import app.mikazuki.thailand.MailSenderService
-import app.mikazuki.thailand.participants.ParticipantForm
-import app.mikazuki.thailand.participants.ParticipantService
-import app.mikazuki.thailand.participants.toParticipant
-import app.mikazuki.thailand.place.PlaceService
+import app.mikazuki.thailand.domain.MailSenderService
+import app.mikazuki.thailand.domain.participants.ParticipantService
+import app.mikazuki.thailand.domain.party.PartyService
+import app.mikazuki.thailand.domain.place.PlaceService
+import app.mikazuki.thailand.web.form.ParticipantForm
+import app.mikazuki.thailand.web.form.toParticipant
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap

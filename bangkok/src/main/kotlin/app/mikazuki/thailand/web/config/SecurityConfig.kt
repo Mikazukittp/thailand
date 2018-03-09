@@ -1,6 +1,6 @@
-package app.mikazuki.thailand.misc.config
+package app.mikazuki.thailand.web.config
 
-import app.mikazuki.thailand.user.UserService
+import app.mikazuki.thailand.domain.user.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder

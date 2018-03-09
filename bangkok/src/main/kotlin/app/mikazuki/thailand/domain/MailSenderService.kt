@@ -1,7 +1,7 @@
-package app.mikazuki.thailand
+package app.mikazuki.thailand.domain
 
-import app.mikazuki.thailand.participants.Participant
-import app.mikazuki.thailand.party.Party
+import app.mikazuki.thailand.domain.participants.Participant
+import app.mikazuki.thailand.domain.party.Party
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.regions.Regions
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient
@@ -34,24 +34,24 @@ class MailSenderService {
     fun send(party: Party, participant: Participant) {
 
         val subject = messageSource.getMessage("confirmed.message.title", null, Locale.JAPAN)
-        var url = "http://eo-wedding.com/parties/" + party.hash
-        var userName = participant.lastName + " " + participant.firstName
+        val url = "http://eo-wedding.com/parties/" + party.hash
+        val userName = participant.lastName + " " + participant.firstName
         val attendance = if (participant.attendance) "出席" else "欠席"
 
-        var messageProperties = arrayOf(userName, party.name, url, participant.postalCode, participant.address, participant.email, attendance)
+        val messageProperties = arrayOf(userName, party.name, url, participant.postalCode, participant.address, participant.email, attendance)
         val textBody = messageSource.getMessage("confirmed.message.body.detail", messageProperties, Locale.JAPAN) + messageSource.getMessage("confirmed.message.footer", null, Locale.JAPAN)
         val client = AmazonSimpleEmailServiceClient(BasicAWSCredentials(ACCESS_KEY, SECRET_ACCESS_KEY))
-            .withRegion<AmazonSimpleEmailServiceClient>(Regions.US_WEST_2)
+                .withRegion<AmazonSimpleEmailServiceClient>(Regions.US_WEST_2)
         val request = SendEmailRequest()
-            .withDestination(
-                    Destination().withToAddresses(participant.email))
-            .withMessage(Message()
-                .withBody(Body()
-                    .withText(Content()
-                        .withCharset("UTF-8").withData(textBody)))
-                .withSubject(Content()
-                    .withCharset("UTF-8").withData(subject)))
-            .withSource(senderAddressBuilder(FROM_ADDRESS, messageSource.getMessage("confirmed.message.sender", null, Locale.JAPAN)))
+                .withDestination(
+                        Destination().withToAddresses(participant.email))
+                .withMessage(Message()
+                        .withBody(Body()
+                                .withText(Content()
+                                        .withCharset("UTF-8").withData(textBody)))
+                        .withSubject(Content()
+                                .withCharset("UTF-8").withData(subject)))
+                .withSource(senderAddressBuilder(FROM_ADDRESS, messageSource.getMessage("confirmed.message.sender", null, Locale.JAPAN)))
 
         try {
             client.sendEmail(request)
@@ -63,8 +63,7 @@ class MailSenderService {
 
     private fun senderAddressBuilder(fromAddress: String, senderName: String): String {
         try {
-            val address = InternetAddress(fromAddress,
-                    senderName, "ISO-2022-JP")
+            val address = InternetAddress(fromAddress, senderName, "ISO-2022-JP")
             return address.toString()
         } catch (e: UnsupportedEncodingException) {
             println("Internet Address Constructor throws UnsupportedEncoding")

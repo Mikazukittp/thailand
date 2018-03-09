@@ -1,4 +1,4 @@
-package app.mikazuki.thailand
+package app.mikazuki.thailand.web
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
