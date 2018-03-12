@@ -72,7 +72,7 @@ CREATE TABLE participants (
   gender tinyint NOT NULL,
   side bit(1) NOT NULL,
   attendance bit(1) NOT NULL,
-  message varchar(100),
+  message varchar(800),
   postal_code varchar(100),
   address varchar(100),
   phone varchar(100),
