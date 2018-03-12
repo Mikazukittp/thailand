@@ -27,7 +27,7 @@ bin
 *.log
 *.swp
 *.bak
-log/
+logs/
 
 # Node js
 node_modules/

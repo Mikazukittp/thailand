@@ -8,4 +8,6 @@ spring:
     cache: false
 domain: "http://localhost:8080"
 logging:
-  path: ./log/
+  path: ./logs/
+  level:
+    org.springframework: WARN
