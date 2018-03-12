@@ -7,3 +7,5 @@ spring:
   thymeleaf:
     cache: false
 domain: "http://localhost:8080"
+logging:
+  path: ./log/
