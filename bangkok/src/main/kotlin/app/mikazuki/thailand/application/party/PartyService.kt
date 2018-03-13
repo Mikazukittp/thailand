@@ -1,4 +1,4 @@
-package app.mikazuki.thailand.domain.party
+package app.mikazuki.thailand.application.party
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

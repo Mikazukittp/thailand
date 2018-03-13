@@ -1,15 +1,19 @@
-package app.mikazuki.thailand.domain.place
+package app.mikazuki.thailand.domain
 
+import java.sql.Date
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
-@Entity(name = "places")
-data class Place(
+@Entity(name = "parties")
+class Party(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long = -1,
+        val userId: Long,
+        val placeId: Long,
         val name: String,
-        val address: String,
-        val phone: String,
-        val url: String)
+        val date: Date,
+        val mPrice: Int,
+        val fPrice: Int,
+        val hash: String)

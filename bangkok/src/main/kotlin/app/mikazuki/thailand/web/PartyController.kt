@@ -1,9 +1,9 @@
 package app.mikazuki.thailand.web
 
-import app.mikazuki.thailand.domain.MailSenderService
-import app.mikazuki.thailand.domain.participants.ParticipantService
-import app.mikazuki.thailand.domain.party.PartyService
-import app.mikazuki.thailand.domain.place.PlaceService
+import app.mikazuki.thailand.application.MailSenderService
+import app.mikazuki.thailand.application.participant.ParticipantService
+import app.mikazuki.thailand.application.party.PartyService
+import app.mikazuki.thailand.application.place.PlaceService
 import app.mikazuki.thailand.web.form.ParticipantForm
 import app.mikazuki.thailand.web.form.toParticipant
 import org.springframework.beans.factory.annotation.Autowired

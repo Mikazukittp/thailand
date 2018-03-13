@@ -1,7 +1,7 @@
-package app.mikazuki.thailand.domain
+package app.mikazuki.thailand.application
 
-import app.mikazuki.thailand.domain.participants.Participant
-import app.mikazuki.thailand.domain.party.Party
+import app.mikazuki.thailand.domain.Participant
+import app.mikazuki.thailand.domain.Party
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.regions.Regions
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient

@@ -1,6 +1,6 @@
 package app.mikazuki.thailand.web.config
 
-import app.mikazuki.thailand.domain.user.UserService
+import app.mikazuki.thailand.application.user.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -8,7 +8,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.transaction.annotation.Transactional
 
 @EnableWebSecurity
 @Configuration
@@ -43,7 +47,15 @@ class SecurityConfig @Autowired constructor(private val userDetailsService: User
     }
 
     override fun configure(auth: AuthenticationManagerBuilder?) {
-        auth?.userDetailsService(userDetailsService)
-            ?.passwordEncoder(BCryptPasswordEncoder())
+        auth?.userDetailsService(CustomUserDetailsService(userDetailsService))
+                ?.passwordEncoder(BCryptPasswordEncoder())
+    }
+
+    open inner class CustomUserDetailsService(private val service: UserService) : UserDetailsService {
+        @Transactional
+        override fun loadUserByUsername(username: String?): UserDetails {
+            if (username?.isEmpty() != false) throw UsernameNotFoundException("")
+            return service.findByNameOrEmail(username, username) ?: throw UsernameNotFoundException("")
+        }
     }
 }

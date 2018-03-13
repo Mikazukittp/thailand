@@ -1,5 +1,6 @@
-package app.mikazuki.thailand.domain.participants
+package app.mikazuki.thailand.application.participant
 
+import app.mikazuki.thailand.domain.Participant
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
