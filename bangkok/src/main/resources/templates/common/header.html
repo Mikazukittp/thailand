@@ -1,0 +1,18 @@
+<html lang="ja"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<header th:fragment="common_header">
+    <div class="container">
+        <ul class="header-list">
+            <li sec:authorize-url="/user"><a th:href="@{'/user'}">管理画面</a></li>
+            <li sec:authorize="hasRole('USER')"><span sec:authentication="principal.name">User name</span></li>
+            <li sec:authorize-url="/logout">
+                <form method="post" th:action="@{'/logout'}">
+                    <input type="submit" value="ログアウト"/>
+                </form>
+            </li>
+            <li sec:authorize-url="/login"><a th:href="@{'/login'}">ログイン</a></li>
+        </ul>
+    </div>
+</header>
+</html>

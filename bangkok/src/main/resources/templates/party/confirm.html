@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:replace="common/head :: common_head(${party.name})"></div>
+<body>
+<header sec:authorize="hasRole('USER')" th:replace="common/header :: common_header"></header>
+<div class="container">
+    <h1 th:text="${party.name}">aaa</h1>
+    <form method="post" th:action="@{'/parties/' + ${hash} + '/complete'}" th:object="${form}">
+        <input type="hidden" th:field="*{firstName}"/>
+        <input type="hidden" th:field="*{lastName}"/>
+        <input type="hidden" th:field="*{email}"/>
+        <input type="hidden" th:field="*{attendance}"/>
+        <input type="hidden" th:field="*{gender}"/>
+        <input type="hidden" th:field="*{side}"/>
+        <input type="hidden" th:field="*{postalCode}"/>
+        <input type="hidden" th:field="*{address}"/>
+        <input type="hidden" th:field="*{phone}"/>
+        <input type="hidden" th:field="*{message}"/>
+
+        <p id="sei" class="u-full-width" th:text="*{lastName} + ' ' + *{firstName}"></p>
+        <p id="email" class="u-full-width" th:text="*{email}"></p>
+
+        <p id="attendance" class="u-full-width" th:text="*{attendance} ? '出席' : '欠席'"></p>
+        <p id="gender" class="u-full-width" th:text="*{gender} ? '男性' : '女性'"></p>
+        <p id="side" class="u-full-width" th:text="*{side} ? '新郎側ゲスト' : '新婦側ゲスト'"></p>
+
+        <p id="postal-code" class="u-full-width" th:text="*{postalCode}"></p>
+        <p id="address" class="u-full-width" th:text="*{address}"></p>
+        <p id="phone" class="u-full-width" th:text="*{phone}"></p>
+
+        <p id="message" class="u-full-width" th:text="*{message}"></p>
+
+        <input class="u-full-width" type="submit" value="送信"/>
+    </form>
+</div>
+<footer th:replace="common/footer :: common_footer"></footer>
+</body>
+</html>
