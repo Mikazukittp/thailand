@@ -4,7 +4,7 @@
 <div th:replace="common/head :: common_head(${party.name})"></div>
 <body>
 <header sec:authorize="hasRole('USER')" th:replace="common/header :: common_header"></header>
-<div class="container">
+<div class="container serif">
     <h1 th:text="${party.name}">aaa</h1>
     <form method="post" th:action="@{'/parties/' + ${hash} + '/complete'}" th:object="${form}">
         <input type="hidden" th:field="*{firstName}"/>

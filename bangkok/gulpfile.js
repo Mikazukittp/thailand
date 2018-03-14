@@ -11,7 +11,7 @@ const staticDir = 'src/main/resources/static'
 gulp.task('sass', () => {
   gulp.src(path.join(staticDir, '/sass/**/*.scss'))
     .pipe(plumber())
-    .pipe(sass({outputStyle: 'expanded'}))
+    .pipe(sass({includePaths: ['node_modules']}))
     .pipe(cssmin())
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(staticDir + '/css/'))

@@ -1,5 +1,13 @@
-@import "modern-normalize.min.scss";
-@import "skeleton.min.scss";
-@import "mixin.scss";
-@import "ext.scss";
-@import "content.scss";
+@import "skeleton";
+@import "mixin";
+@import "util";
+@import "typography";
+// modules
+@import "modules/grid";
+@import "modules/forms";
+@import "modules/buttons";
+@import "modules/headers";
+@import "modules/tables";
+@import "modules/alerts";
+
+@import "content";

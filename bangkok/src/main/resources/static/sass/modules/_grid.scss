@@ -1,0 +1,16 @@
+.container {
+    padding-top: 20px;
+    overflow: hidden;
+}
+
+.xs.six.columns {
+    width: 48%;
+}
+
+.xs.column, .xs.columns {
+    margin-left: 4%;
+}
+
+.xs.column:first-child, .columns:first-child {
+    margin-left: 0;
+}

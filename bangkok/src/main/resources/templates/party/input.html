@@ -4,7 +4,7 @@
 <div th:replace="common/head :: common_head(${party.name})"></div>
 <body>
 <header sec:authorize="hasRole('USER')" th:replace="common/header :: common_header"></header>
-<div class="container">
+<div class="container serif">
 
     <p class="alert" th:classappend="${'alert-' + message.type}" th:if="${message != null}" th:utext="${message.body}">
         メッセージ</p>
@@ -24,14 +24,12 @@
         <span class="hand-writing day-of-week">Sun.</span>
     </div>
 
-    <a href="http://eo-wedding.com/parties/9BKviZmm#rsvp" class="btn">出席連絡する</a>
+    <a href="#rsvp" class="button button-block button-primary">出席連絡する</a>
 
-    <picture id="catch" class="picture">
-        <source media="(min-width: 1000px)"
-                srcset="/img/pic1.png"/>
-        <source media="(min-width: 400px)"
-                srcset="/img/pic1-1000.png, /img/pic1-1000@2x.png 2x"/>
-        <img src="/img/pic1-400.png" srcset="/img/pic1-400.png, /img/pic1-400@2x.png 2x"/>
+    <picture class="picture">
+        <source media="(min-width: 1200px)" srcset="/img/pic1.png"/>
+        <source media="(min-width: 550px)" srcset="/img/pic1-1000.png, /img/pic1-1000@2x.png 2x"/>
+        <img src="/img/pic1-400.png" srcset="/img/pic1-550.png, /img/pic1-550@2x.png 2x"/>
     </picture>
 
     <div id="content" class="content">
@@ -93,7 +91,7 @@
         出席情報のご登録をお願い申し上げます<br/>
     </div>
 
-    <form id="input" method="post" th:action="@{'/parties/' + ${hash}}" th:object="${form}">
+    <form method="post" th:action="@{'/parties/' + ${hash}}" th:object="${form}">
         <p>
             <small>* 必須項目</small>
         </p>

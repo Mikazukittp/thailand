@@ -1,0 +1,42 @@
+header {
+    padding: 8px 0;
+    background-color: #666;
+    color: #fff;
+}
+
+header .container {
+    padding-top: 0;
+}
+
+header .header-list {
+    display: flex;
+    margin: 0;
+    list-style: none;
+    justify-content: flex-end;
+}
+
+header .header-list li {
+    margin: 0;
+    padding-left: 8px;
+}
+
+header .header-list form {
+    margin: 0;
+}
+
+header .header-list input[type=submit] {
+    display: inline;
+    height: auto;
+    padding: 0;
+    color: inherit;
+    text-align: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    border-radius: 0;
+    border: none;
+    box-sizing: border-box;
+    margin: 0;
+}

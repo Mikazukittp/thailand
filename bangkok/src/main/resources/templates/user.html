@@ -9,31 +9,37 @@
     </div>
 
     <div th:unless="${party == null}">
-        <p th:text="${party.name}">Party name</p>
-        <p th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</p>
-        <p><a th:text="${place.name}" th:href="${place.url}" target="_blank">place</a></p>
+        <!--<p th:text="${party.name}">Party name</p>-->
+        <!--<p th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</p>-->
+        <!--<p><a th:text="${place.name}" th:href="${place.url}" target="_blank">place</a></p>-->
 
 
         <p>出欠フォームURL: <a th:text="${domain + '/parties/' + party.hash}" th:href="@{'/parties/' + ${party.hash}}"
                          target="_blank">http://eo-wedding.com/parties/qwertyuiop</a></p>
 
-        <p>現在回答者数: <span th:text="${participants_size}">999</span>名
-            （出席 <span th:text="${participants_attendance}">999</span>名、欠席<span
-                    th:text="${participants_size - participants_attendance}">999</span>名）</p>
-        <table>
-            <tr>
-                <th>出欠</th>
-                <th>姓</th>
-                <th>名</th>
-                <th>お祝いメッセージ</th>
-            </tr>
-            <tr th:each="participant : ${participants}">
-                <td th:text="${participant.attendance} ? '出席' : '欠席'">出欠</td>
-                <td th:text="${participant.lastName}">姓</td>
-                <td th:text="${participant.firstName}">名</td>
-                <td th:text="${participant.message}">メッセージ</td>
-            </tr>
-        </table>
+        <p>出席 <span th:text="${participants_attendance}">999</span>名/欠席<span
+                th:text="${participants_size - participants_attendance}">999</span>名</p>
+        <p>現在回答者数: <span th:text="${participants_size}">999</span>名</p>
+        <div id="table-wrapper">
+            <table>
+                <tr>
+                    <th>出欠</th>
+                    <th>姓</th>
+                    <th>名</th>
+                    <th>招待元</th>
+                    <th>性別</th>
+                    <th>お祝いメッセージ</th>
+                </tr>
+                <tr th:each="participant : ${participants}">
+                    <td th:text="${participant.attendance} ? '出席' : '欠席'">出席</td>
+                    <td th:text="${participant.lastName}">姓</td>
+                    <td th:text="${participant.firstName}">名</td>
+                    <td th:text="${participant.side} ? '新郎' : '新婦'">新郎</td>
+                    <td th:text="${participant.gender == 1} ? '男性' : '女性'">名</td>
+                    <td th:text="${participant.message}">メッセージ</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
 <footer th:replace="common/footer :: common_footer"></footer>
