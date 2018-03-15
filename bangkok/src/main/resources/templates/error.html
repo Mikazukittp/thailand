@@ -3,6 +3,16 @@
 <head>
     <meta charset="utf-8"/>
     <title>Error</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-64303218-6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-64303218-6');
+    </script>
 </head>
 <body>
 <h1 th:text="${status} + ' ' + ${error}">500 Internal Server Error</h1>
