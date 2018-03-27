@@ -11,24 +11,8 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("api/bounces")
 @RestController
 class BounceController @Autowired constructor(@Value("\${domain}") private val domain: String,
+                                              @Value("\${aws.lambda.accesskey:}") private var ACCESS_KEY: String,
                                               private val bounceRepository: BounceRepository) {
-
-
-    @Value("\${aws.lambda.accesskey:}")
-    lateinit var ACCESS_KEY: String
-
-    inner class BounceResponse(statusCode: Int, statusMessage: String?, email: String?) {
-
-        var statusCode: Int = 200
-        var statusMessage: String? = null
-        var email: String? = null
-
-        init {
-            this.statusCode = statusCode
-            this.statusMessage = statusMessage
-            this.email = email
-        }
-    }
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
@@ -43,4 +27,7 @@ class BounceController @Autowired constructor(@Value("\${domain}") private val d
 
         return BounceResponse(200, null, emailBounce.email)
     }
+
+    data class BounceResponse(val statusCode: Int = 200, val statusMessage: String?, val String: String?)
 }
+

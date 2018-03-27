@@ -20,7 +20,7 @@ class SecurityConfig @Autowired constructor(private val userDetailsService: User
 
     override fun configure(web: WebSecurity?) {
         super.configure(web)
-        web?.ignoring()?.antMatchers("/css/**", "/js/**", "/img/**", "/font/**", "/api/**")
+        web?.ignoring()?.antMatchers("/css/**", "/js/**", "/img/**", "/font/**")
     }
 
     override fun configure(http: HttpSecurity?) {
@@ -30,6 +30,7 @@ class SecurityConfig @Autowired constructor(private val userDetailsService: User
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/parties/**").permitAll()
+                .antMatchers("/api/bounces").permitAll()
                 .antMatchers("/login").anonymous()
                 .antMatchers("/logout").authenticated()
                 .anyRequest().authenticated()
@@ -42,6 +43,8 @@ class SecurityConfig @Autowired constructor(private val userDetailsService: User
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
+            .and()
+                .csrf().disable()
             // @formatter:on
         }
     }
