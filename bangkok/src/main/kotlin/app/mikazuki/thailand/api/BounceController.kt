@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("api/bounces")
 @RestController
 class BounceController @Autowired constructor(@Value("\${domain}") private val domain: String,
-                                              @Value("\${aws.lambda.accesskey:}") private var ACCESS_KEY: String,
+                                              @Value("\${aws.lambda.accesskey:}") private val accessKey: String,
                                               private val bounceRepository: BounceRepository) {
 
-    @PostMapping("")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun save(@RequestHeader("token") token: String,
              @Validated @RequestBody emailBounce: EmailBounce): BounceResponse {
 
-        if (token != ACCESS_KEY) {
+        if (token != accessKey) {
             return BounceResponse(503, "access denied", emailBounce.email)
         }
 
@@ -28,6 +28,9 @@ class BounceController @Autowired constructor(@Value("\${domain}") private val d
         return BounceResponse(200, null, emailBounce.email)
     }
 
-    data class BounceResponse(val statusCode: Int = 200, val statusMessage: String?, val String: String?)
+    data class BounceResponse(val statusCode: Int = 200,
+                              val statusMessage: String?,
+                              val email: String?)
+
 }
 
