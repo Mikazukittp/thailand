@@ -81,6 +81,16 @@ CREATE TABLE participants (
 
 ALTER TABLE participants ADD INDEX party_id(party_id);
 
+CREATE TABLE bounces (
+  id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  email varchar(320) NOT NULL,
+  bounce_type varchar(100) NOT NULL,
+  bounce_sub_type varchar(100) NOT NULL,
+  created_at DATETIME(3) NOT NULL
+);
+
+ALTER TABLE bounces ADD INDEX email(email);
+
 -- ====================
 -- データ投入
 -- ====================
@@ -133,6 +143,18 @@ INSERT INTO parties (
 --   1, '優作', '徳永', 'yusaku.tokunaga@gmail.com', 1, 1, 1, NULL, NULL, NULL, NULL  
 -- ), (
 --   1, 'じゅん','', '', 0, 0, 1, NULL, NULL, NULL, NULL  
+-- );
+
+-- INSERT INTO bounces (
+--   id,
+--   email,
+--   bounce_type,
+--   bounce_sub_type,
+--   created_at
+-- ) VALUES (
+--   1, 'ishibe.tatsuya@gmail.com', 'Pendding', 'Pendding', '2017-03-12 00:00:00'
+-- ),(
+--   2, 'ishibe.tatsuya@gmail.com', 'Pendding', 'Pendding', '2017-03-13 00:00:00'
 -- );
 
 COMMIT;

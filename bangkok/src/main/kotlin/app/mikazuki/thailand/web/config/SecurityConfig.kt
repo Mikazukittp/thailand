@@ -30,6 +30,7 @@ class SecurityConfig @Autowired constructor(private val userDetailsService: User
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/parties/**").permitAll()
+                .antMatchers("/api/bounces").permitAll()
                 .antMatchers("/login").anonymous()
                 .antMatchers("/logout").authenticated()
                 .anyRequest().authenticated()
@@ -42,6 +43,8 @@ class SecurityConfig @Autowired constructor(private val userDetailsService: User
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
+            .and()
+                .csrf().disable()
             // @formatter:on
         }
     }
