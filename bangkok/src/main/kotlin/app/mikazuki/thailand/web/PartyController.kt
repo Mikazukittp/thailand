@@ -6,7 +6,6 @@ import app.mikazuki.thailand.application.party.PartyService
 import app.mikazuki.thailand.application.place.PlaceService
 import app.mikazuki.thailand.web.form.ParticipantForm
 import app.mikazuki.thailand.web.form.toParticipant
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
 import org.springframework.validation.BindingResult
@@ -17,25 +16,24 @@ import javax.validation.Valid
 
 @RequestMapping("/parties/{hash}")
 @Controller
-class PartyController @Autowired constructor(private val partyService: PartyService,
-                                             private val placeService: PlaceService,
-                                             private val participantService: ParticipantService,
-                                             private val mailService: MailSenderService) {
+class PartyController(private val partyService: PartyService,
+                      private val placeService: PlaceService,
+                      private val participantService: ParticipantService,
+                      private val mailService: MailSenderService) {
 
-    @GetMapping("")
+    @GetMapping
     fun input(@PathVariable("hash") hash: String,
               @ModelAttribute("form") form: ParticipantForm,
               model: ModelMap): String {
-        val party = partyService.findByHash(hash)
-        party ?: return "index"
-        model.addAttribute("party", party)
+        val party = partyService.findByHash(hash) ?: throw IllegalArgumentException("")
         val place = placeService.findById(party.placeId).get()
+        model.addAttribute("party", party)
         model.addAttribute("place", place)
         model.addAttribute("hash", hash)
         return "party/input"
     }
 
-    @PostMapping("")
+    @PostMapping
     fun confirm(@PathVariable("hash") hash: String,
                 @ModelAttribute("form") @Valid form: ParticipantForm,
                 result: BindingResult,
@@ -45,11 +43,9 @@ class PartyController @Autowired constructor(private val partyService: PartyServ
             return input(hash, form, model)
         }
 
-        val party = partyService.findByHash(hash)
-        party ?: return "index"
-
-        model.addAttribute("party", party)
+        val party = partyService.findByHash(hash) ?: throw IllegalArgumentException("")
         val place = placeService.findById(party.placeId).get()
+        model.addAttribute("party", party)
         model.addAttribute("place", place)
         model.addAttribute("hash", hash)
         return "party/confirm"
@@ -59,9 +55,7 @@ class PartyController @Autowired constructor(private val partyService: PartyServ
     fun complete(@PathVariable("hash") hash: String,
                  @Validated form: ParticipantForm,
                  attributes: RedirectAttributes): String {
-        val party = partyService.findByHash(hash)
-        party ?: throw IllegalStateException("Invalid party")
-
+        val party = partyService.findByHash(hash) ?: throw IllegalStateException("Invalid party")
         val participant = form.toParticipant(party.id)
         participantService.save(participant)
         mailService.send(party, participant)

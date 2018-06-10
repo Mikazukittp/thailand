@@ -68,7 +68,7 @@ CREATE TABLE participants (
   party_id int NOT NULL,
   first_name varchar(100) NOT NULL,
   last_name varchar(100) NOT NULL,
-  email varchar(100) NOT NULL,
+  email varchar(320) NOT NULL,
   gender tinyint NOT NULL,
   side bit(1) NOT NULL,
   attendance bit(1) NOT NULL,

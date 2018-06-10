@@ -17,6 +17,7 @@
     "node-sass": "^4.7.2"
   },
   "dependencies": {
+    "bootstrap": "^4.0.0",
     "skeleton-scss": "^2.0.4"
   }
 }

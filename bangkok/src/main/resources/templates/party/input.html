@@ -53,8 +53,8 @@
         <p>
             <span class="rem2" th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</span>
             <span class="rem2 day-of-week">Sun.</span><br/>
-            <span>Open 17:00</span><br/>
-            <span>Start 17:30</span><br/>
+            <span>Open 16:30</span><br/>
+            <span>Start 17:00</span><br/>
         </p>
         <p>
             <span class="rem2">TRUNK<br/>by SHOTO GALLERY</span><br/>
@@ -168,9 +168,6 @@
         <span class="error-msg" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Name error</span>
         <label for="address">住所</label>
         <input id="address" class="u-full-width" type="text" th:field="*{address}" th:errorclass="error"/>
-
-        <!-- <label for="phone">電話番号</label> -->
-        <input id="phone" class="u-full-width" type="hidden" th:field="*{phone}" th:errorclass="error"/>
 
         <label for="message">お祝いメッセージ</label>
         <textarea id="message" class="u-full-width" th:field="*{message}" th:errorclass="error"></textarea>

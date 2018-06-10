@@ -24,16 +24,14 @@
             <table>
                 <tr>
                     <th>出欠</th>
-                    <th>姓</th>
-                    <th>名</th>
+                    <th>氏名</th>
                     <th>招待元</th>
                     <th>性別</th>
                     <th>お祝いメッセージ</th>
                 </tr>
                 <tr th:each="participant : ${participants}">
                     <td th:text="${participant.attendance} ? '出席' : '欠席'">出席</td>
-                    <td th:text="${participant.lastName}">姓</td>
-                    <td th:text="${participant.firstName}">名</td>
+                    <td th:text="${participant.lastName + ' ' + participant.firstName}">氏名</td>
                     <td th:text="${participant.side} ? '新郎' : '新婦'">新郎</td>
                     <td th:text="${participant.gender == 1} ? '男性' : '女性'">名</td>
                     <td th:text="${participant.message}">メッセージ</td>
