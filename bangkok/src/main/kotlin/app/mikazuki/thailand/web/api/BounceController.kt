@@ -1,4 +1,4 @@
-package app.mikazuki.thailand.api
+package app.mikazuki.thailand.web.api
 
 import app.mikazuki.thailand.domain.EmailBounce
 import app.mikazuki.thailand.application.bounce.BounceRepository

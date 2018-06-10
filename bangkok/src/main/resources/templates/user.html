@@ -20,6 +20,7 @@
         <p>出席 <span th:text="${participants_attendance}">999</span>名/欠席<span
                 th:text="${participants_size - participants_attendance}">999</span>名</p>
         <p>現在回答者数: <span th:text="${participants_size}">999</span>名</p>
+        <p><a th:href="@{'/csv/participants.csv'}">csvダウンロード</a></p>
         <div id="table-wrapper">
             <table>
                 <tr>
