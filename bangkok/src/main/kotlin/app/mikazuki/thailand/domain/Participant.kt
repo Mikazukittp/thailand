@@ -20,5 +20,6 @@ data class Participant(
         val message: String?,
         val address: String?,
         val phone: String?,
+        val allergy: String?,
         val hash: String)
 
