@@ -102,6 +102,8 @@ INSERT INTO users (
   password
 ) VALUES (
   'norieri', 'norihito20@gmail.com', '$2a$10$LtAu/zx522X2i7vYHgPpo.QG5WY9zLSEwS0XGwJ5rR7Sen3hOPCMi'
+), (
+  'tbd', 'tbd@example.com', '$2a$10$LtAu/zx522X2i7vYHgPpo.QG5WY9zLSEwS0XGwJ5rR7Sen3hOPCMi'
 );
 
 INSERT INTO places (
@@ -110,8 +112,9 @@ INSERT INTO places (
   phone,
   url
 ) VALUES (
-  'TRUNK BY SHOTO GALLERY', '〒150-0046 東京都渋谷区松濤1丁目5−4', '03-5784-1060
-', 'https://trunk-shoto.com/'
+  'TRUNK BY SHOTO GALLERY', '〒150-0046 東京都渋谷区松濤1丁目5−4', '03-5784-1060', 'https://trunk-shoto.com/'
+), (
+  'Dining&Bar faith', '〒940-0066 新潟県長岡市東坂之上町3丁目1−14', '0258-39-1177', ''
 );
 
 INSERT INTO parties (
@@ -124,6 +127,8 @@ INSERT INTO parties (
   hash
 ) VALUES (
   1, 1, 'Nori & Eri\'s Wedding', '2018-04-22', 8000, 6000, '9BKviZmm'
+), (
+  2, 2, 'TBD', '2018-08-18', 6000, 5500, 'Hq4o5zLQ'
 );
 
 -- INSERT INTO participants (

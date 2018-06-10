@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="ja">
 <div th:replace="common/head :: common_head(${party.name})"></div>
 <body>
 <header sec:authorize="hasRole('USER')" th:replace="common/header :: common_header"></header>
@@ -13,23 +13,24 @@
         <span class="transitional">WEDDING<br/>AFTER PARTY</span>
         <span id="invitation" class="hand-writing">Invitation</span>
         <p>
-            <span class="transitional gray-border rem3">NORIHITO</span>
-            <span class="hand-writing gray short-height">&amp;</span>
-            <span class="transitional gray-border rem3">ERI</span>
+            <span class="transitional gray-border rem3" th:text="${party.name}">TITLE</span>
         </p>
     </h1>
 
     <div id="date" class="content">
         <span class="hand-writing" th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</span>
-        <span class="hand-writing day-of-week">Sun.</span>
+        <span class="hand-writing day-of-week"
+              th:text="${T(org.thymeleaf.util.DateUtils).dayOfWeekNameShort(party.date, T(java.util.Locale).ENGLISH) + '.'}">EEE.</span>
     </div>
 
-    <a href="#rsvp" class="button button-block button-primary">出席連絡する</a>
+    <a href=" #rsvp" class="button button-block button-primary">出席連絡する</a>
 
     <picture class="picture">
-        <source media="(min-width: 1200px)" srcset="/img/pic1.png"/>
-        <source media="(min-width: 550px)" srcset="/img/pic1-1000.png, /img/pic1-1000@2x.png 2x"/>
-        <img src="/img/pic1-400.png" srcset="/img/pic1-550.png, /img/pic1-550@2x.png 2x"/>
+        <source media="(min-width: 1200px)" th:attr="srcset=${'/img/' + party.hash + '/pic1.png'}"/>
+        <source media="(min-width: 550px)"
+                th:attr="srcset=${'/img/' + party.hash + '/pic1-1000.png, /img/' + party.hash + '/pic1-1000@2x.png 2x'}"/>
+        <img th:src="${'/img/' + party.hash +'/pic1-400.png'}"
+             th:attr="srcset=${'/img/' + party.hash + '/pic1-550.png, /img/' + party.hash + '/pic1-550@2x.png 2x'}"/>
     </picture>
 
     <div id="content" class="content">
@@ -43,8 +44,8 @@
             心より楽しみにしております
         </p>
         <p>
-            2018年3月吉日<br/>
-            木村憲仁　福田恵里
+            2018年6月吉日<br/>
+            xxx　yyy
         </p>
     </div>
 
@@ -52,18 +53,20 @@
         <h2>Information</h2>
         <p>
             <span class="rem2" th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</span>
-            <span class="rem2 day-of-week">Sun.</span><br/>
-            <span>Open 16:30</span><br/>
-            <span>Start 17:00</span><br/>
+            <span class="rem2 day-of-week"
+                  th:text="${T(org.thymeleaf.util.DateUtils).dayOfWeekNameShort(party.date, T(java.util.Locale).ENGLISH) + '.'}">EEE.</span><br/>
+            <span>Open 18:00</span><br/>
+            <span>Start 19:30</span><br/>
+            <span>End 22:30</span><br/>
         </p>
         <p>
-            <span class="rem2">TRUNK<br/>by SHOTO GALLERY</span><br/>
+            <span class="rem2" th:text="${place.name}">会場名</span><br/>
             <span th:text="${place.address}">住所</span>
         </p>
         <p>
             <span>会費制</span><br/>
-            <span>男性：8,000円</span><br/>
-            <span>女性：7,000円</span><br/>
+            <span th:text="${'男性：' + party.mPrice} + 円">男性：8,000円</span><br/>
+            <span th:text="${'女性：' + party.fPrice} + 円">女性：7,000円</span><br/>
         </p>
     </div>
 
@@ -71,23 +74,17 @@
         <h2>Access</h2>
         <p>
             <b>電車でお越しの方</b><br/>
-            半蔵門線・銀座線・JR・東急東横線・田園都市線<br/>
-            渋谷駅より徒歩5分<br/>
-            <br/>
-            <b>お車でお越しの方</b><br/>
-            首都高速3号線渋谷IC下車、文化村方面5分<br/>
-            駐車場 近隣利用(有料)<br/>
+            長岡駅より徒歩9分、すずらん通り日本生命ビル前<br/>
         </p>
     </div>
     <iframe id="map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.62643990721!2d139.6935293156562!3d35.66157428019894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188cabe5baf157%3A0x2bc2af9dbf4eb36f!2sTRUNK+BY+SHOTO+GALLERY!5e0!3m2!1sja!2sjp!4v1520267002800"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1774.9851386391817!2d138.85020869003282!3d37.45018989171606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5ff5a9ad59ae8d73%3A0x96ba36fda5c1b0bd!2sDining%EF%BC%86Bar+faith!5e0!3m2!1sja!2sjp!4v1528641067136"
             frameborder="0" style="border:0" allowfullscreen></iframe>
-
     <div id="rsvp" class="content">
         <h2>R.S.V.P</h2>
         誠にお手数ではございますが<br/>
         当日のご都合の程を以下の回答フォームより<br/>
-        4月8日(日)までに<br/>
+        6月30日(土)までに<br/>
         出席情報のご登録をお願い申し上げます<br/>
     </div>
 
@@ -158,7 +155,8 @@
             </label>
         </div>
 
-        <span class="error-msg" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}">Name error</span>
+        <span class="error-msg" th:if="${#fields.hasErrors('postalCode')}"
+              th:errors="*{postalCode}">Name error</span>
         <label for="postal-code">郵便番号</label>
         <div class="row">
             <input id="postal-code" class="three columns" type="text" th:field="*{postalCode}" th:errorclass="error"
