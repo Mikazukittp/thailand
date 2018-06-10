@@ -15,3 +15,17 @@
     @content;
   }
 }
+
+// 550px - 1200px
+@mixin tablet {
+  @media screen and (#{$bp-larger-than-mobile}) {
+    @content;
+  }
+}
+
+// 1200px - 
+@mixin pc {
+  @media screen and (#{$bp-larger-than-desktop}) {
+    @content;
+  }
+}

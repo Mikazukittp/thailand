@@ -29,6 +29,7 @@ class SecurityConfig @Autowired constructor(private val userDetailsService: User
             it
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/api/**").permitAll()
                 .antMatchers("/parties/**").permitAll()
                 .antMatchers("/api/bounces").permitAll()
                 .antMatchers("/login").anonymous()
@@ -46,12 +47,13 @@ class SecurityConfig @Autowired constructor(private val userDetailsService: User
             .and()
                 .csrf().disable()
             // @formatter:on
+
         }
     }
 
     override fun configure(auth: AuthenticationManagerBuilder?) {
         auth?.userDetailsService(CustomUserDetailsService(userDetailsService))
-                ?.passwordEncoder(BCryptPasswordEncoder())
+            ?.passwordEncoder(BCryptPasswordEncoder())
     }
 
     open inner class CustomUserDetailsService(private val service: UserService) : UserDetailsService {

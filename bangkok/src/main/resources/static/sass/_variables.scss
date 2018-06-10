@@ -1,0 +1,37 @@
+/* 
+ * Override skeleton-scss/scss/base/_variable.scss
+ */
+
+// Breakpoints
+// tablet
+$bp-larger-than-mobile    : "min-width: 550px";
+$bp-larger-than-phablet   : "min-width: 550px" !default;
+// PC
+$bp-larger-than-tablet    : "min-width: 1200px";
+$bp-larger-than-desktop   : "min-width: 1200px";
+$bp-larger-than-desktophd : "min-width: 1200px" !default;
+
+// Colors
+$light-grey: #e1e1e1 !default;
+$dark-grey: #333 !default;
+$font-color: #222 !default;
+// $primary-color: #33c3f0 !default;
+$primary-color: #667a9a;
+$secondary-color: lighten($dark-grey, 13.5%) !default;
+$border-color: #bbb !default;
+// $link-color: #1eaedb !default;
+$link-color: lighten($primary-color, 13.5%);
+
+// Typography
+$font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+
+//Grid Variables
+$container-width: 960px !default;
+$container-width-larger-than-mobile: 85% !default;
+$container-width-larger-than-phablet: 80% !default;
+$total-columns: 12 !default;
+$column-width: 100 / $total-columns !default; // calculates individual column width based off of # of columns
+$column-margin: 4% !default; // space between columns
+
+// Misc
+$global-radius: 4px !default;

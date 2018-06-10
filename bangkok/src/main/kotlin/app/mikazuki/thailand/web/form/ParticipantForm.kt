@@ -7,21 +7,24 @@ import javax.validation.constraints.*
 data class ParticipantForm(@field:NotBlank(message = "必須入力です")
                            @field:Size(max = 40, message = "最大文字数を超えています")
                            var firstName: String = "",
+
                            @field:NotBlank(message = "必須入力です")
                            @field:Size(max = 40, message = "最大文字数を超えています")
                            var lastName: String = "",
+
                            @field:NotBlank(message = "必須入力です")
-                           @field:Size(max = 200, message = "最大文字数を超えています")
+                           @field:Size(max = 320, message = "最大文字数を超えています")
                            @field:Email(message = "正しいEメールアドレスを入力してください")
                            var email: String = "",
-                           @field:NotNull var gender: Boolean = true,
-                           @field:NotNull var side: Boolean = true,
-                           @field:NotNull var attendance: Boolean = true,
+
+                           @field:NotNull(message = "必須入力です") var gender: Boolean = true,
+                           @field:NotNull(message = "必須入力です") var side: Boolean = true,
+                           @field:NotNull(message = "必須入力です") var attendance: Boolean = true,
+                           @field:Size(max = 400, message = "最大文字数を超えています")
                            var message: String? = null,
                            @field:Pattern(regexp = "(?:[0-9]{3}-?[0-9]{4})?", message = "入力値が不正です")
                            var postalCode: String? = null,
-                           var address: String? = null,
-                           var phone: String? = null)
+                           var address: String? = null)
 
 fun ParticipantForm.toParticipant(partyId: Long) = Participant(
         partyId = partyId,
@@ -34,7 +37,8 @@ fun ParticipantForm.toParticipant(partyId: Long) = Participant(
         postalCode = postalCode,
         message = message,
         address = address,
-        phone = phone,
+        // TODO: DDLの見直し
+        phone = null,
         hash = createUserHash()
 )
 
