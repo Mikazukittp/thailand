@@ -2,7 +2,7 @@
 @mixin sp-wide {
   width: 100vw;
   margin: 0 -20px;
-  
+
   @include tablet {
     width: 100%;
     margin: 0;
@@ -12,7 +12,7 @@
 @mixin wide {
   width: 100vw;
   margin: 0 -20px;
-  
+
   @include tablet {
     margin: 0 -10vw;
   }
@@ -73,14 +73,14 @@ picture, .picture {
   @include sp-wide;
   img {
     // margin: 0 calc((100vw - 550px) / 2);
-    width: 100%;
-    margin: 0;
+    @include sp-wide;
+    margin: 0 0 20px;
   }
 
   @include tablet {
     img {
       width: 100%;
-      margin: 0;
+      margin: 0 0 20px;
     }
   }
 }
@@ -105,6 +105,8 @@ picture, .picture {
 }
 
 #content {
+  @include sp-wide;
+
   background-image: url("/img/bg1-400@2x.png"), url("/img/bg2-400@2x.png");
   background-repeat: no-repeat;
   background-position: -5% top, 130% bottom;
@@ -121,13 +123,18 @@ picture, .picture {
   @include flex-column;
   @include square-bg("/img/bg3-400@2x.png", "/img/bg3.png", "/img/bg3.png");
   padding: 10px 0;
-  line-height: 1;
+  line-height: 1.2;
+
 }
 
 #map {
   height: 300px;
-  @include tablet { height: 350px; }
-  @include pc { height: 400px; }
+  @include tablet {
+    height: 350px;
+  }
+  @include pc {
+    height: 400px;
+  }
   @include wide;
 }
 

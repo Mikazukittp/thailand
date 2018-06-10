@@ -20,12 +20,12 @@
     <div id="date" class="content">
         <span class="hand-writing" th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</span>
         <span class="hand-writing day-of-week"
-              th:text="${T(org.thymeleaf.util.DateUtils).dayOfWeekNameShort(party.date, T(java.util.Locale).ENGLISH) + '.'}">EEE.</span>
+              th:text="${T(org.thymeleaf.util.DateUtils).dayOfWeekNameShort(party.date, T(java.util.Locale).ENGLISH)} + .">EEE.</span>
     </div>
 
     <a href=" #rsvp" class="button button-block button-primary">出席連絡する</a>
 
-    <picture class="picture">
+    <picture class="picture content">
         <source media="(min-width: 1200px)" th:attr="srcset=${'/img/' + party.hash + '/pic1.png'}"/>
         <source media="(min-width: 550px)"
                 th:attr="srcset=${'/img/' + party.hash + '/pic1-1000.png, /img/' + party.hash + '/pic1-1000@2x.png 2x'}"/>
@@ -35,6 +35,7 @@
 
     <div id="content" class="content">
         <h2>Just Married</h2>
+        <!--/* FIXME */-->
         <p>
             結婚式二次会のお知らせです<br/>
             日頃お世話になっているみなさまへ<br/>
@@ -54,7 +55,8 @@
         <p>
             <span class="rem2" th:text="${#dates.format(party.date,'yyyy/MM/dd')}">yyyy-mm-dd</span>
             <span class="rem2 day-of-week"
-                  th:text="${T(org.thymeleaf.util.DateUtils).dayOfWeekNameShort(party.date, T(java.util.Locale).ENGLISH) + '.'}">EEE.</span><br/>
+                  th:text="${T(org.thymeleaf.util.DateUtils).dayOfWeekNameShort(party.date, T(java.util.Locale).ENGLISH)} + .">EEE.</span><br/>
+            <!--/* FIXME */-->
             <span>Open 18:00</span><br/>
             <span>Start 19:30</span><br/>
             <span>End 22:30</span><br/>
@@ -65,13 +67,14 @@
         </p>
         <p>
             <span>会費制</span><br/>
-            <span th:text="${'男性：' + party.mPrice} + 円">男性：8,000円</span><br/>
-            <span th:text="${'女性：' + party.fPrice} + 円">女性：7,000円</span><br/>
+            <span th:text="男性： + ${#numbers.formatInteger(party.mPrice, 1,'COMMA')} + 円">男性：8,000円</span><br/>
+            <span th:text="女性： + ${#numbers.formatInteger(party.fPrice, 1,'COMMA')} + 円">女性：7,000円</span><br/>
         </p>
     </div>
 
     <div id="access" class="content">
         <h2>Access</h2>
+        <!--/* FIXME */-->
         <p>
             <b>電車でお越しの方</b><br/>
             長岡駅より徒歩9分、すずらん通り日本生命ビル前<br/>
@@ -84,6 +87,7 @@
         <h2>R.S.V.P</h2>
         誠にお手数ではございますが<br/>
         当日のご都合の程を以下の回答フォームより<br/>
+        <!--/* FIXME */-->
         6月30日(土)までに<br/>
         出席情報のご登録をお願い申し上げます<br/>
     </div>
