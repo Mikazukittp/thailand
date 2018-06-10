@@ -24,7 +24,10 @@ data class ParticipantForm(@field:NotBlank(message = "必須入力です")
                            var message: String? = null,
                            @field:Pattern(regexp = "(?:[0-9]{3}-?[0-9]{4})?", message = "入力値が不正です")
                            var postalCode: String? = null,
-                           var address: String? = null)
+                           var address: String? = null,
+                           @field:Size(max = 400, message = "最大文字数を超えています")
+                           var allergy: String? = null
+                           )
 
 fun ParticipantForm.toParticipant(partyId: Long) = Participant(
         partyId = partyId,
@@ -39,6 +42,7 @@ fun ParticipantForm.toParticipant(partyId: Long) = Participant(
         address = address,
         // TODO: DDLの見直し
         phone = null,
+        allergy = allergy,
         hash = createUserHash()
 )
 

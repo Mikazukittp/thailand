@@ -15,6 +15,7 @@
         <input type="hidden" th:field="*{side}"/>
         <input type="hidden" th:field="*{postalCode}"/>
         <input type="hidden" th:field="*{address}"/>
+        <input type="hidden" th:field="*{allergy}"/>
         <input type="hidden" th:field="*{message}"/>
 
         <p id="sei" class="u-full-width" th:text="*{lastName} + ' ' + *{firstName}"></p>
@@ -26,6 +27,7 @@
 
         <p id="postal-code" class="u-full-width" th:text="*{postalCode}"></p>
         <p id="address" class="u-full-width" th:text="*{address}"></p>
+        <p id="allergy" class="u-full-width" th:text="*{allergy}"></p>
 
         <p id="message" class="u-full-width" th:text="*{message}"></p>
 

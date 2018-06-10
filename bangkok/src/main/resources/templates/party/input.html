@@ -169,6 +169,10 @@
         <label for="address">住所</label>
         <input id="address" class="u-full-width" type="text" th:field="*{address}" th:errorclass="error"/>
 
+        <span class="error-msg" th:if="${#fields.hasErrors('allergy')}" th:errors="*{allergy}">Name error</span>
+        <label for="allergy">アレルギー</label>
+        <input id="allergy" class="u-full-width" type="text" th:field="*{allergy}" th:errorclass="error"/>
+
         <label for="message">お祝いメッセージ</label>
         <textarea id="message" class="u-full-width" th:field="*{message}" th:errorclass="error"></textarea>
 

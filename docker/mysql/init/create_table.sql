@@ -76,6 +76,7 @@ CREATE TABLE participants (
   postal_code varchar(100),
   address varchar(100),
   phone varchar(100),
+  allergy varchar(800),
   hash varchar(32) NOT NULL UNIQUE KEY
 );
 
