@@ -103,7 +103,7 @@ INSERT INTO users (
 ) VALUES (
   'norieri', 'norihito20@gmail.com', '$2a$10$LtAu/zx522X2i7vYHgPpo.QG5WY9zLSEwS0XGwJ5rR7Sen3hOPCMi'
 ), (
-  'tbd', 'tbd@example.com', '$2a$10$LtAu/zx522X2i7vYHgPpo.QG5WY9zLSEwS0XGwJ5rR7Sen3hOPCMi'
+  'shotayuko', 'sho.yu_0207@docomo.ne.jp', '$2a$10$LtAu/zx522X2i7vYHgPpo.QG5WY9zLSEwS0XGwJ5rR7Sen3hOPCMi'
 );
 
 INSERT INTO places (
@@ -128,7 +128,7 @@ INSERT INTO parties (
 ) VALUES (
   1, 1, 'Nori & Eri\'s Wedding', '2018-04-22', 8000, 6000, '9BKviZmm'
 ), (
-  2, 2, 'TBD', '2018-08-18', 6000, 5500, 'Hq4o5zLQ'
+  2, 2, 'Shota & Yuko\'s Wedding', '2018-08-18', 6000, 5500, 'Hq4o5zLQ'
 );
 
 -- INSERT INTO participants (
