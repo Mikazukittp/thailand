@@ -44,7 +44,7 @@ class MailSenderService {
         val userName = participant.lastName + " " + participant.firstName
         val attendance = if (participant.attendance) "出席" else "欠席"
 
-        val messageProperties = arrayOf(userName, party.name, url, participant.postalCode, participant.address, participant.email, attendance)
+        val messageProperties = arrayOf(userName, party.name, url, participant.postalCode, participant.address, participant.email, participant.allergy, attendance)
         val textBody = messageSource.getMessage("confirmed.message.body.detail", messageProperties, Locale.JAPAN) + messageSource.getMessage("confirmed.message.footer", null, Locale.JAPAN)
         val client = AmazonSimpleEmailServiceClient(BasicAWSCredentials(ACCESS_KEY, SECRET_ACCESS_KEY))
                 .withRegion<AmazonSimpleEmailServiceClient>(Regions.US_WEST_2)
